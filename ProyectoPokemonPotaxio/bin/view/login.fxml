@@ -68,19 +68,19 @@
                   <Image url="@../../img/imgLogoPokemon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="103.0" fitWidth="376.0" layoutX="161.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLogoAbajo" fitHeight="103.0" fitWidth="376.0" layoutX="161.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgLogoPotaxio.png" />
                </image>
             </ImageView>
-            <PasswordField layoutX="266.0" layoutY="266.0" style="-fx-background-color: c0ffa4; -fx-border-color: #3267b0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" />
-            <TextField layoutX="266.0" layoutY="198.0" prefWidth="150.0" style="-fx-background-color: c0ffa4; -fx-border-color: #3267b0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" />
-            <ImageView fitHeight="48.0" fitWidth="118.0" layoutX="283.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+            <PasswordField fx:id="passwordFieldUsuarioLogin" layoutX="266.0" layoutY="266.0" style="-fx-background-color: c0ffa4; -fx-border-color: #3267b0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" />
+            <TextField fx:id="txtFieldUsuarioLogin" layoutX="266.0" layoutY="198.0" prefWidth="150.0" style="-fx-background-color: c0ffa4; -fx-border-color: #3267b0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" />
+            <ImageView fx:id="imgUsuarioLogin" fitHeight="48.0" fitWidth="118.0" layoutX="283.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgUsuario.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="118.0" layoutX="283.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgUsuarioContraseñaLogin" fitHeight="48.0" fitWidth="118.0" layoutX="283.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgContraseña.png" />
                </image>
