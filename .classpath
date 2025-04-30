@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="controller/" kind="src" path="ProyectoPokemonPotaxio/src"/>
+	<classpathentry kind="src" path="ProyectoPokemonPotaxio/src/controller"/>
+	<classpathentry kind="output" path="ProyectoPokemonPotaxio/bin"/>
+</classpath>
