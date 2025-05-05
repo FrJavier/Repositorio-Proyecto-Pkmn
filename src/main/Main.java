@@ -1,6 +1,6 @@
 package main;
 
-import controller.loginController;
+import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +19,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
      
         
-        loginController controller = loader.getController();
+        LoginController controller = loader.getController();
         controller.setStage(primaryStage);
         
         primaryStage.show();
