@@ -4,6 +4,7 @@ package controller;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 public class LoginController {
-
     @FXML
     private Button btnEntrar;
 
@@ -55,6 +55,9 @@ public class LoginController {
 
     @FXML
     private TextField txtFieldUsuarioLogin;
+    
+    @FXML
+    private Label txtError;
 
     private Stage stage;  // Añadimos un Stage para controlar la ventana
     
@@ -71,6 +74,16 @@ public class LoginController {
 
     @FXML
     private void handleLogin() {
+    	
+    	if(txtFieldUsuarioLogin.getText().isEmpty()) {
+    		txtError.setText("Inserta un nombre de usuario, por favor");
+    		txtError.setVisible(true);
+    	}
+    	else if(passwordFieldUsuarioLogin.getText().isEmpty()) {
+    		txtError.setText("Inserta una contraseña, por favor");
+    		txtError.setVisible(true);
+    	}else {
+    		
         try {
             // Cargar la vista Menu.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
@@ -84,7 +97,11 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    	}
     }
+    
+ 
+    
     
     
 }
