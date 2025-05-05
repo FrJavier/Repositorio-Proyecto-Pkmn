@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -83,6 +84,12 @@
             <ImageView fx:id="imgUsuarioContraseñaLogin" fitHeight="48.0" fitWidth="118.0" layoutX="283.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgContraseña.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnEntrar" layoutX="365.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: c0ffa4; -fx-border-color: #3267b0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" />
+            <ImageView fx:id="imgEntrar" fitHeight="45.0" fitWidth="89.0" layoutX="374.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/imgEntrar.png" />
                </image>
             </ImageView>
       </children>

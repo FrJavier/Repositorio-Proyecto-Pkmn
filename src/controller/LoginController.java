@@ -1,14 +1,18 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 public class LoginController {
-	
-	public Stage stage;
+
+    @FXML
+    private Button btnEntrar;
+
+    @FXML
+    private ImageView imgEntrar;
 
     @FXML
     private ImageView imgLoginDia;
@@ -39,9 +43,5 @@ public class LoginController {
 
     @FXML
     private TextField txtFieldUsuarioLogin;
-    
-    public void setStage (Stage primaryStage) {
-    	stage=primaryStage;
-    }
 
 }
