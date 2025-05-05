@@ -1,7 +1,9 @@
+package controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
-public class PleaseProvideControllerClassName {
+public class tiendaController {
 
     @FXML
     private ImageView imgEstanteria;
