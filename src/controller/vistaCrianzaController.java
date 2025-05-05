@@ -1,6 +1,6 @@
 package controller;
 
 
-public class vistaCrianzaController {
+public class VistaCrianzaController {
 
 }

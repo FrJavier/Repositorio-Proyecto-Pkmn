@@ -3,7 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
-public class pokemonCapturaController {
+public class PokemonCapturaController {
 
     @FXML
     private ImageView imgCapturaPokemon;

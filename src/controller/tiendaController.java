@@ -3,7 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
-public class tiendaController {
+public class TiendaController {
 
     @FXML
     private ImageView imgEstanteria;
