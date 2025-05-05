@@ -92,6 +92,8 @@
                   <Image url="@../../img/imgEntrar.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnSalir" layoutX="231.0" layoutY="318.0" mnemonicParsing="false" text="Salir" onAction="#cerrar" />
+            <Button fx:id="btnRegistrar" layoutX="321.0" layoutY="357.0" mnemonicParsing="false" text="Registrarse" />
       </children>
     </AnchorPane>
   </children>

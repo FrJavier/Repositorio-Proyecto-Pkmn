@@ -1,5 +1,7 @@
 package controller;
 
+
+import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -15,6 +17,12 @@ public class LoginController {
     @FXML
     private Button btnEntrar;
 
+    @FXML
+    private Button btnSalir;
+    
+    @FXML
+    private Button btnRegistrar;
+    
     @FXML
     private ImageView imgEntrar;
 
@@ -49,6 +57,12 @@ public class LoginController {
     private TextField txtFieldUsuarioLogin;
 
     private Stage stage;  // Añadimos un Stage para controlar la ventana
+    
+    @FXML
+    void cerrar(ActionEvent event) {
+    	Stage stage=(Stage) btnSalir.getScene().getWindow();
+    	stage.close();
+    }
 
     // Este método se llama desde Main.java para pasar el Stage
     public void setStage(Stage stage) {
@@ -71,4 +85,6 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+    
+    
 }
