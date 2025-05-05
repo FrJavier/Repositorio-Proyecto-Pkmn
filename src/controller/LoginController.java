@@ -5,6 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 public class LoginController {
 
@@ -44,4 +48,27 @@ public class LoginController {
     @FXML
     private TextField txtFieldUsuarioLogin;
 
+    private Stage stage;  // Añadimos un Stage para controlar la ventana
+
+    // Este método se llama desde Main.java para pasar el Stage
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    @FXML
+    private void handleLogin() {
+        try {
+            // Cargar la vista Menu.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+            Parent root = loader.load();
+
+            // Crear y mostrar la nueva escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Menú Potaxies");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
