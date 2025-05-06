@@ -58,7 +58,7 @@
                   <Image url="@../../img/imgPotaxioAlante.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnTienda" fitHeight="174.0" fitWidth="140.0" layoutX="394.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnTienda" fitHeight="174.0" fitWidth="140.0" layoutX="394.0" layoutY="-10.0" onMouseClicked="#abrirTienda" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgTiendaEdificio.png" />
                </image>
