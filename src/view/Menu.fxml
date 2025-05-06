@@ -73,7 +73,7 @@
                   <Image url="@../../img/imgCrentroPokemonEdificio.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnSalir" fitHeight="34.0" fitWidth="65.0" layoutX="249.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnSalir" fitHeight="34.0" fitWidth="65.0" layoutX="249.0" layoutY="260.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgSalir.png" />
                </image>

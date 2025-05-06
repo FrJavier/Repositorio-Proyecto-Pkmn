@@ -142,4 +142,10 @@ public class Menu {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    void cerrar(ActionEvent event) {
+    	Stage stage=(Stage) btnSalir.getScene().getWindow();
+    	stage.close();
+    }
 }
