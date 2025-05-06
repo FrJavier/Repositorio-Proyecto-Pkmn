@@ -62,17 +62,13 @@ public class Menu {
     @FXML
     private void abrirCentroPokemon(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CentroPokemon.fxml"));
-            Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CentroPokemon.fxml"));
+			Parent root = loader.load();
 
-            // Obtener el stage actual desde el evento
-            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-
-            // Reemplazar la escena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Centro Pokémon");
-            stage.show();
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,17 +77,13 @@ public class Menu {
     @FXML
     private void abrirVistaCombate(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VistaCombate.fxml"));
-            Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCombate.fxml"));
+			Parent root = loader.load();
 
-            // Obtener el stage actual desde el evento
-            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-
-            // Reemplazar la escena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Combate");
-            stage.show();
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,17 +92,13 @@ public class Menu {
     @FXML
     private void abrirCapturarPokemon(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PokemonCaptura.fxml"));
-            Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PokemonCaptura.fxml"));
+			Parent root = loader.load();
 
-            // Obtener el stage actual desde el evento
-            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-
-            // Reemplazar la escena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Captura");
-            stage.show();
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,17 +107,13 @@ public class Menu {
     @FXML
     private void abrirGuarderia(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Guarderia.fxml"));
-            Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Guarderia.fxml"));
+			Parent root = loader.load();
 
-            // Obtener el stage actual desde el evento
-            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-
-            // Reemplazar la escena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Guarderia");
-            stage.show();
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
