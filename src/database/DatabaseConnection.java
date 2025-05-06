@@ -1,28 +1,31 @@
 
 package database;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-	public Connection databaseLink;
-
-	public Connection getConnection() {
-		String dataBaseName = "pokemon";
-		String dataBaseUser = "root";
-		String dataBasePass = "";
-		String url = "jdbc:mysql://localhost/" + dataBaseName;
-
+	public static Connection con;
+	
+	private static String url = "jdbc:mysql://localhost:3306/pokemon";
+	private static String login = "root";
+	private static String password = "";
+	
+	public static Connection getConnection(){
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			databaseLink = DriverManager.getConnection(url, dataBaseUser, dataBasePass);
+			con = DriverManager.getConnection(url, login, password);
 			System.out.println("Conexión establecida");
-
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return databaseLink;
+		} catch (ClassNotFoundException e) {
+	        System.out.println("Driver MySQL no encontrado.");
+	        e.printStackTrace();
+	    } catch (SQLException e) {
+	        System.out.println("Error al conectar con la base de datos.");
+	        e.printStackTrace();
+	    }
+		return con;
 	}
 }
