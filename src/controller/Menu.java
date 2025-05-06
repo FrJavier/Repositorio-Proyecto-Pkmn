@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 
 
@@ -46,22 +47,13 @@ public class Menu {
     @FXML
     private void abrirTienda(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Tienda.fxml"));
-            Parent root = loader.load();
-			TiendaController TiendaController = loader.getController();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
+			Parent root = loader.load();
 
-            // Obtener el stage actual desde el evento (ventana activa)
-            //Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-
-            // Reemplazar la escena
-            Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			stage.setScene(scene);//Cargamos la escena en el stage
-			
-			//TiendaController.init();
-			stage.show();
-			this.stage.close();
-
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
