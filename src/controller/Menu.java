@@ -49,8 +49,9 @@ public class Menu {
         	FXMLLoader loader= new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
         	Parent root = loader.load();
         	//Muestra escena
-        	Scene scene = new Scene(root);
-			stage.setScene(scene);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Tienda Pokémon");
             stage.show();
     	}catch(Exception e) {
     		e.printStackTrace();
