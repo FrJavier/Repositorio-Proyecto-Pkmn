@@ -2,9 +2,11 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class TiendaController {
 
+	private Stage stage;
     @FXML
     private ImageView imgEstanteria;
 
@@ -35,7 +37,8 @@ public class TiendaController {
     @FXML
     private ImageView imgTienda;
 
-    public void init() {
+    public void init(Stage stage, Menu menu) {
+    	this.stage= stage;
 
 	}
 }
