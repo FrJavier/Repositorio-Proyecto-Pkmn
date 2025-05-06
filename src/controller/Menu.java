@@ -45,17 +45,58 @@ public class Menu {
 
     @FXML
     private void abrirTienda(MouseEvent event) {
-    	try {
-        	FXMLLoader loader= new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
-        	Parent root = loader.load();
-        	//Muestra escena
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Tienda.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual desde el evento (ventana activa)
+            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+
+            // Reemplazar la escena
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Tienda Pokémon");
             stage.show();
-            System.out.println("Imagen clicada");
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	};
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void abrirCentroPokemon(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CentroPokemon.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual desde el evento
+            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+
+            // Reemplazar la escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Centro Pokémon");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void abrirVistaCombate(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VistaCombate.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual desde el evento
+            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+
+            // Reemplazar la escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Combate");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

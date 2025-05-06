@@ -63,12 +63,12 @@
                   <Image url="@../../img/imgTiendaEdificio.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnGimnasio" fitHeight="188.0" fitWidth="187.0" layoutX="196.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnGimnasio" fitHeight="188.0" fitWidth="187.0" layoutX="196.0" layoutY="-14.0" onMouseClicked="#abrirVistaCombate" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgGimnasioEdificio.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnCentroPokemon" fitHeight="131.0" fitWidth="206.0" layoutX="335.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnCentroPokemon" fitHeight="131.0" fitWidth="206.0" layoutX="335.0" layoutY="260.0" onMouseClicked="#abrirCentroPokemon" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgCrentroPokemonEdificio.png" />
                </image>
@@ -83,7 +83,7 @@
                   <Image url="@../../img/imgGuarderiaEdificio.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnEntrenamiento" fitHeight="137.0" fitWidth="227.0" layoutX="33.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnEntrenamiento" fitHeight="137.0" fitWidth="227.0" layoutX="33.0" layoutY="247.0" onMouseClicked="#abrirVistaCombate" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgEntrenamientoEdificio.png" />
                </image>
