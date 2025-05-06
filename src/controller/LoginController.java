@@ -73,7 +73,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleLogin() {
+    private void entrar() {
     	
     	if(txtFieldUsuarioLogin.getText().isEmpty()) {
     		txtError.setText("Inserta un nombre de usuario, por favor");

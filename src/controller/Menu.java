@@ -53,6 +53,7 @@ public class Menu {
             stage.setScene(scene);
             stage.setTitle("Tienda Pokémon");
             stage.show();
+            System.out.println("Imagen clicada");
     	}catch(Exception e) {
     		e.printStackTrace();
     	};
