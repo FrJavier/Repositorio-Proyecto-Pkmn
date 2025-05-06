@@ -53,7 +53,7 @@
                   <Image url="@../../img/imgMenu.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgPersonaje" fitHeight="104.0" fitWidth="96.0" layoutX="464.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPersonaje" fitHeight="104.0" fitWidth="96.0" layoutX="14.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgPotaxioAlante.png" />
                </image>
@@ -78,7 +78,7 @@
                   <Image url="@../../img/imgSalir.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnGuarderia" fitHeight="155.0" fitWidth="150.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnGuarderia" fitHeight="155.0" fitWidth="150.0" layoutY="-10.0" onMouseClicked="#abrirGuarderia" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgGuarderiaEdificio.png" />
                </image>
@@ -86,6 +86,11 @@
             <ImageView fx:id="btnEntrenamiento" fitHeight="137.0" fitWidth="227.0" layoutX="33.0" layoutY="247.0" onMouseClicked="#abrirVistaCombate" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgEntrenamientoEdificio.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="178.0" layoutX="453.0" layoutY="226.0" onMouseClicked="#abrirCapturarPokemon" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/imgCapturarPokemon.png" />
                </image>
             </ImageView>
       </children>

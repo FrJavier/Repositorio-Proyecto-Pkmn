@@ -35,4 +35,7 @@ public class TiendaController {
     @FXML
     private ImageView imgTienda;
 
+    public void init() {
+
+	}
 }

@@ -48,15 +48,20 @@ public class Menu {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Tienda.fxml"));
             Parent root = loader.load();
+			TiendaController TiendaController = loader.getController();
 
             // Obtener el stage actual desde el evento (ventana activa)
-            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            //Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
 
             // Reemplazar la escena
             Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Tienda Pokémon");
-            stage.show();
+			Stage stage = new Stage();
+			stage.setScene(scene);//Cargamos la escena en el stage
+			
+			TiendaController.init();
+			stage.show();
+			this.stage.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,6 +99,44 @@ public class Menu {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Combate");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void abrirCapturarPokemon(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PokemonCaptura.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual desde el evento
+            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+
+            // Reemplazar la escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Captura");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void abrirGuarderia(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Guarderia.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual desde el evento
+            Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+
+            // Reemplazar la escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Guarderia");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
