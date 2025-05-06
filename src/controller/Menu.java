@@ -58,7 +58,7 @@ public class Menu {
 			Stage stage = new Stage();
 			stage.setScene(scene);//Cargamos la escena en el stage
 			
-			TiendaController.init();
+			//TiendaController.init();
 			stage.show();
 			this.stage.close();
 

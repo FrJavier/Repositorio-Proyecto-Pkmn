@@ -88,7 +88,7 @@
                   <Image url="@../../img/imgEntrenamientoEdificio.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="178.0" layoutX="453.0" layoutY="226.0" onMouseClicked="#abrirCapturarPokemon" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnCapturarPokemon" fitHeight="60.0" fitWidth="178.0" layoutX="453.0" layoutY="226.0" onMouseClicked="#abrirCapturarPokemon" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgCapturarPokemon.png" />
                </image>

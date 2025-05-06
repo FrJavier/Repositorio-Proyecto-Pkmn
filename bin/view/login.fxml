@@ -88,7 +88,7 @@
                   <Image url="@../../img/imgContraseña.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEntrar" fitHeight="45.0" fitWidth="89.0" layoutX="374.0" layoutY="312.0" onMouseClicked="#handleLogin" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgEntrar" fitHeight="45.0" fitWidth="89.0" layoutX="374.0" layoutY="312.0" onMouseClicked="#entrar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgEntrar.png" />
                </image>
