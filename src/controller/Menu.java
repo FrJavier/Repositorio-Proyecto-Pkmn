@@ -120,7 +120,7 @@ public class Menu {
     }
     
     @FXML
-    void cerrar(ActionEvent event) {
+    void cerrar(MouseEvent  event) {
     	Stage stage=(Stage) btnSalir.getScene().getWindow();
     	stage.close();
     }
