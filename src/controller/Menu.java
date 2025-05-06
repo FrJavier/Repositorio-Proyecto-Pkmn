@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 
 public class Menu {
 
+    Stage stage= new Stage();
+
     @FXML
     private ImageView btnCentroPokemon;
 
@@ -42,10 +44,14 @@ public class Menu {
     private ImageView imgPersonaje;
 
     @FXML
-    void abrirTienda(MouseEvent event) {
+    private void abrirTienda(MouseEvent event) {
     	try {
         	FXMLLoader loader= new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
         	Parent root = loader.load();
+        	//Muestra escena
+        	Scene scene = new Scene(root);
+			stage.setScene(scene);
+            stage.show();
     	}catch(Exception e) {
     		e.printStackTrace();
     	};
