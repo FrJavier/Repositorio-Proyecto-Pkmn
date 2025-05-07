@@ -1,6 +1,12 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Entrenador {
 	
@@ -53,9 +59,14 @@ public class Entrenador {
 		this.pokedollares = pokedollares;
 	}
 	
+	public Entrenador( String usuario, String pass) {
+		super();
+		this.usuario = usuario;
+		this.pass = pass;
+		
+	}
 	
-	
-	
+
 	
 	
 	

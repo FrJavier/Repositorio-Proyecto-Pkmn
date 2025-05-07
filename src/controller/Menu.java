@@ -1,5 +1,8 @@
 package controller;
 
+import java.sql.Connection;
+
+import database.DatabaseConnection;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Entrenador;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -43,6 +47,10 @@ public class Menu {
 
     @FXML
     private ImageView imgPersonaje;
+    
+    private LoginController loginControllerr;
+    private Stage stag;
+    private Entrenador entrenador;
 
     @FXML
     private void abrirTienda(MouseEvent event) {
@@ -124,4 +132,13 @@ public class Menu {
     	Stage stage=(Stage) btnSalir.getScene().getWindow();
     	stage.close();
     }
+
+	public void init(Entrenador ent, Stage stage2, LoginController loginController) {
+		this.loginControllerr =loginController;
+		this.stage = stage2;
+		this.entrenador = ent;
+		DatabaseConnection con = new DatabaseConnection();
+
+		Connection conexion = con.getConnection();
+	}
 }

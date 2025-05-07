@@ -1,4 +1,4 @@
-package controller.centropokemon;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +7,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-public class java {
+public class CentropokemonController {
 
     @FXML
     private Button btnCurarBoton;

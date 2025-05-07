@@ -1,9 +1,10 @@
+package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 
-public class PleaseProvideControllerClassName {
+public class EquipopokemonController {
 
     @FXML
     private Label hpPkmCinco;
