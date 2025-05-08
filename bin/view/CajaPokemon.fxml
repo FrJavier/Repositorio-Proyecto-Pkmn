@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="411.0" fitWidth="600.0">
+               <image>
+                  <Image url="@CajaFondo.png" />
+               </image>
+            </ImageView>
+            <ImageView id="primerPolemonEquipo" fx:id="pokemonEquipoUno" fitHeight="99.0" fitWidth="154.0" layoutX="67.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="segundoPokemonEquipo" fx:id="pokemonEquipoDos" fitHeight="99.0" fitWidth="154.0" layoutX="230.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="tercerPokemonEquipo" fx:id="pokemonEquipoTres" fitHeight="99.0" fitWidth="154.0" layoutX="399.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="cuartoPokemonEquipo" fx:id="pokemonEquipoCuatro" fitHeight="99.0" fitWidth="154.0" layoutX="50.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="quintoPokemonEquipo" fx:id="pokemonEquipoCinco" fitHeight="99.0" fitWidth="154.0" layoutX="235.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="sextoPokemonEquipo" fx:id="pokemonEquipoSeis" fitHeight="99.0" fitWidth="154.0" layoutX="400.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="volverMenuCaja" fx:id="volverMenuCaja" fitHeight="34.0" fitWidth="109.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Volver-6-5-2025%20(2).gif" />
+               </image>
+            </ImageView>
+            <ImageView id="btnCajaPkm" fx:id="btnCajaPkm" fitHeight="58.0" fitWidth="96.0" layoutX="259.0" layoutY="353.0">
+               <image>
+                  <Image url="@Caja-6-5-2025.gif" />
+               </image>
+            </ImageView>
+            <ProgressBar id="BarravidaPkmUno" fx:id="vitalidadPkmUno" layoutX="86.0" layoutY="150.0" prefHeight="18.0" prefWidth="96.0" progress="0.35" />
+            <ProgressBar id="BarravidaPkmDos" fx:id="vitalidadPkmDos" layoutX="259.0" layoutY="150.0" prefHeight="18.0" prefWidth="96.0" progress="0.68" />
+            <ProgressBar id="BarravidaPkmTres" fx:id="vitalidadPkmTres" layoutX="429.0" layoutY="148.0" prefHeight="18.0" prefWidth="96.0" progress="0.0" />
+            <ProgressBar id="BarravidaPkmCuatro" fx:id="vitalidadPkmCuatro" layoutX="84.0" layoutY="305.0" prefHeight="18.0" prefWidth="96.0" progress="0.55" />
+            <ProgressBar id="BarravidaPkmCinco" fx:id="vitalidadPkmCinco" layoutX="264.0" layoutY="305.0" prefHeight="18.0" prefWidth="96.0" progress="1.0" />
+            <ProgressBar id="BarravidaPkmSeis" fx:id="vitalidadPkmSeis" layoutX="429.0" layoutY="305.0" prefHeight="18.0" prefWidth="96.0" progress="1.0" />
+            <Label id="hpPkmUno" fx:id="hpPkmUno" layoutX="86.0" layoutY="169.0" text="HP 0/100">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label id="hpPkmCuatro" fx:id="hpPkmCuatro" layoutX="87.0" layoutY="322.0" text="HP 0/100" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label id="hpPkmCinco" fx:id="hpPkmCinco" layoutX="264.0" layoutY="322.0" text="HP 0/100" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label id="hpPkmDos" fx:id="hpPkmDos" layoutX="260.0" layoutY="169.0" text="HP 0/100">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label id="hpPkmTres" fx:id="hpPkmTres" layoutX="429.0" layoutY="166.0" text="HP 0/100">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label id="hpPkmSeis" fx:id="hpPkmSeis" layoutX="429.0" layoutY="325.0" text="HP 0/100" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

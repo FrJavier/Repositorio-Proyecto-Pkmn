@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="vboxCentroPokemon" fx:id="vboxCentroPokemon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.centropokemon.java">
+   <children>
+      <AnchorPane prefHeight="409.0" prefWidth="600.0">
+         <children>
+            <ImageView id="Fondocp" fitHeight="400.0" fitWidth="609.0">
+               <image>
+                  <Image url="@andre-brtnh-bertanha-pk-center-painting-animado.gif" />
+               </image>
+            </ImageView>
+            <ImageView id="imgPkmCp" fx:id="imgPkmCp" fitHeight="100.0" fitWidth="131.0" layoutX="71.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="btnSiguientePkmCp" fx:id="btnSiguientePkmCp" fitHeight="53.0" fitWidth="128.0" layoutX="66.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Siguiente-6-5-2025.png" />
+               </image>
+            </ImageView>
+            <ProgressBar id="vitalidadPkmCp" fx:id="vitalidadPkmCp" layoutX="86.0" layoutY="171.0" prefHeight="18.0" prefWidth="91.0" progress="0.22" />
+            <Label id="numVitalidadPkmCp" fx:id="numVitalidadPkmCp" layoutX="86.0" layoutY="192.0" text="HP 0/100" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Pane layoutX="231.0" layoutY="171.0" prefHeight="150.0" prefWidth="148.0" style="-fx-background-color: lightgray;">
+               <children>
+                  <Button id="btnCurarCp" fx:id="btnCurarBoton" layoutX="17.0" layoutY="23.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" text="Curar" />
+                  <Button id="btnSalirCp" fx:id="btnSalircpBoton" layoutX="17.0" layoutY="86.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" text="Salir" />
+               </children>
+            </Pane>
+            <ImageView id="MarcoOpcionsCp" fitHeight="250.0" fitWidth="250.0" layoutX="180.0" layoutY="121.0">
+               <image>
+                  <Image url="@1956744_35675.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="389.0" layoutY="88.0">
+               <image>
+                  <Image url="@imgPotaxioAlante.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
