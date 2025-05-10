@@ -79,8 +79,12 @@ public class LoginController {
 	@FXML
 	private Label txtError;
 
+	///////////////////////////////////////////////////////////////////
+	//Metodos
+	//////////////////////////////////////////////////////////////////
 	private Stage stage; // Añadimos un Stage para controlar la ventana
 
+	//Boton salir
 	@FXML
 	void cerrar(ActionEvent event) {
 		Stage stage = (Stage) btnSalir.getScene().getWindow();
@@ -92,9 +96,11 @@ public class LoginController {
 		this.stage = stage;
 	}
 
+	
+	
+	//Metodo para logearse
 	@FXML
 	public void loguearse(MouseEvent event) {
-		// Object evt = event.getSource();
 
 		if (txtFieldUsuarioLogin.getText().isEmpty()) {
 			txtError.setText("Inserta un nombre de usuario, por favor");
@@ -155,30 +161,34 @@ public class LoginController {
 
 		}
 	}
-
+	
+	
+	
+	//Abrir menu principal
 	private void abrirMenuPrincipal(Entrenador ent) {
-				try {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
-					Parent root = loader.load();
-					Menu menu= loader.getController();
-					
-					
-					
-					Scene scene = new Scene(root);
-					Stage stage = new Stage();
-					stage.setScene(scene);//Cargamos la escena en el stage
-					
-					menu.init(ent, stage, this);
-					
-					stage.show();
-					this.stage.close();
-					
-					
-				}catch(IOException e) {
-					e.printStackTrace();
-				}
+	    try {
+	        // carga el fxml al que va a ir
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+	        Parent root = loader.load();
 
-}
+	        // coge el controlador de el fxml que ha cargado
+	        Menu menu = loader.getController();
+
+	        // Creamos la nueva escena
+	        Scene scene = new Scene(root);
+	        stage.setScene(scene); //pone otra escena en el mismo stage
+
+	        // usa el metodo init al que va para empezarlo
+	        menu.init(ent, stage, this);
+
+	        // Mostramos el menu
+	        stage.show();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 	
 	
 }

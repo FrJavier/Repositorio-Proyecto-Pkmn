@@ -91,7 +91,7 @@
                   <Image url="@../../img/imgObjPokeball.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgSalir" fitHeight="60.0" fitWidth="99.0" layoutX="94.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSalir" fitHeight="60.0" fitWidth="99.0" layoutX="94.0" layoutY="338.0" onMouseClicked="#abrirMenu" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgSalir.png" />
                </image>
