@@ -11,7 +11,6 @@ import model.Entrenador;
 
 public class TiendaController {
 
-	private Stage stage;
     @FXML
     private ImageView imgEstanteria;
 
@@ -41,6 +40,8 @@ public class TiendaController {
 
     @FXML
     private ImageView imgTienda;
+    //variables
+	private Stage stage;
 
     //Init--------------------------------------------------------------------------
     //variables necesarias para iniciar el init

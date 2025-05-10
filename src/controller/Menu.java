@@ -97,6 +97,24 @@ public class Menu {
     }
     //-----------------------------------------------------------------------------------------------
 
+    //Abre centro crianza----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------
+
+    @FXML
+    private void abrirGuarderia(MouseEvent event) {
+        try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCrianza.fxml"));
+			Parent root = loader.load();
+
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //-----------------------------------------------------------------------------------------------
     @FXML
     private void abrirVistaCombate(MouseEvent event) {
         try {
@@ -126,22 +144,6 @@ public class Menu {
             // Crear y mostrar la nueva escena
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-   
-    
-    @FXML
-    private void abrirGuarderia(MouseEvent event) {
-        try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Guarderia.fxml"));
-			Parent root = loader.load();
-
-			// Crear y mostrar la nueva escena
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
