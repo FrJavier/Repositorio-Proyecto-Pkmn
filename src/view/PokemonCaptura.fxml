@@ -68,12 +68,13 @@
                   <Image url="@../../img/ImgPokemonCaptura.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgSalir" fitHeight="55.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSalir" fitHeight="55.0" fitWidth="110.0" onMouseClicked="#abrirMenu" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgSalir.png" />
                </image>
             </ImageView>
       </children>
     </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
   </children>
 </VBox>

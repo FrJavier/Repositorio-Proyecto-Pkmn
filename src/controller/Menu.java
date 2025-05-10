@@ -22,8 +22,7 @@ import javafx.scene.Parent;
 
 public class Menu {
 
-    Stage stage= new Stage();
-
+	//elementos del fxml----------------
     @FXML
     private ImageView btnCentroPokemon;
 
@@ -47,11 +46,16 @@ public class Menu {
 
     @FXML
     private ImageView imgPersonaje;
-    
+	//-----------------------------------
+
+    //Variables--------------------------------
+    Stage stage= new Stage();
     private LoginController loginControllerr;
     private Stage stag;
     private Entrenador entrenador;
-    
+    //-----------------------------------------
+
+    //Abre la tienda---------------------------------------------------------------------------
     @FXML
     private void abrirTienda(MouseEvent event) {
         try {
@@ -72,6 +76,10 @@ public class Menu {
             e.printStackTrace();
         }
     }
+    //-----------------------------------------------------------------------------------------
+
+    //Abre centro pokemon----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------
 
     @FXML
     private void abrirCentroPokemon(MouseEvent event) {
@@ -87,6 +95,7 @@ public class Menu {
             e.printStackTrace();
         }
     }
+    //-----------------------------------------------------------------------------------------------
 
     @FXML
     private void abrirVistaCombate(MouseEvent event) {
@@ -106,17 +115,22 @@ public class Menu {
     @FXML
     private void abrirCapturarPokemon(MouseEvent event) {
         try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PokemonCaptura.fxml"));
-			Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PokemonCaptura.fxml"));
+            Parent root = loader.load();
 
-			// Crear y mostrar la nueva escena
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.setScene(scene);
+            // Obtener el controlador y pasarle los datos necesarios
+            PokemonCapturaController capturaController = loader.getController();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            capturaController.init(currentStage, entrenador, this);
+
+            // Crear y mostrar la nueva escena
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+   
     
     @FXML
     private void abrirGuarderia(MouseEvent event) {
