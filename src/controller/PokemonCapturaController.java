@@ -31,7 +31,7 @@ public class PokemonCapturaController {
     private Menu menu;
     private Entrenador entrenador;
     private Stage stage;
-    
+ 
     //metodo
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;

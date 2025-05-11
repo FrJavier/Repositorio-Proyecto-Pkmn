@@ -103,13 +103,17 @@ public class Menu {
     @FXML
     private void abrirGuarderia(MouseEvent event) {
         try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCrianza.fxml"));
-			Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCrianza.fxml"));
+            Parent root = loader.load();
 
-			// Crear y mostrar la nueva escena
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.setScene(scene);
+            // Obtener el controlador y pasarle los datos necesarios
+            VistaCrianzaController crianzaController = loader.getController();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            crianzaController.init(currentStage, entrenador, this);
+
+            // Crear y mostrar la nueva escena
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }

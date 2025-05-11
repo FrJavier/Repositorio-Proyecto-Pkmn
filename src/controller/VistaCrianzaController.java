@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Entrenador;
@@ -15,6 +16,7 @@ public class VistaCrianzaController {
     private Menu menu;
     private Entrenador entrenador;
 	private Stage stage;
+	
     //metodo
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;
@@ -39,7 +41,6 @@ public class VistaCrianzaController {
             e.printStackTrace();
         }
     }
-    //ERROR POR SOLUCIONAR NO VUELVE AL MENU
     //------------------------------------------------------------------------------
 
 }
