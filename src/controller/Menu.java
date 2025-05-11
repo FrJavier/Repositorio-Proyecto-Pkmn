@@ -48,6 +48,7 @@ public class Menu {
     private ImageView imgPersonaje;
 	//-----------------------------------
 
+    
     //Variables--------------------------------
     Stage stage= new Stage();
     private LoginController loginControllerr;
@@ -55,6 +56,7 @@ public class Menu {
     private Entrenador entrenador;
     //-----------------------------------------
 
+    
     //Abre la tienda---------------------------------------------------------------------------
     @FXML
     private void abrirTienda(MouseEvent event) {
@@ -79,41 +81,47 @@ public class Menu {
     //-----------------------------------------------------------------------------------------
 
     //Abre centro pokemon----------------------------------------------------------------------------
-    //-----------------------------------------------------------------------------------------------
-
+    //----------------------------------------------------------------------------------------------- 
     @FXML
     private void abrirCentroPokemon(MouseEvent event) {
         try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CentroPokemon.fxml"));
-			Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Centropokemonfx.fxml"));
+            Parent root = loader.load();
 
-			// Crear y mostrar la nueva escena
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.setScene(scene);
+            CentropokemonController centroController = loader.getController();
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            centroController.init(currentStage, entrenador, this);
+
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
     //-----------------------------------------------------------------------------------------------
 
     //Abre centro crianza----------------------------------------------------------------------------
-    //-----------------------------------------------------------------------------------------------
-
     @FXML
     private void abrirGuarderia(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCrianza.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador y pasarle los datos necesarios
+            // coje el controlador y pasarle los datos necesarios
             VistaCrianzaController crianzaController = loader.getController();
+            
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             crianzaController.init(currentStage, entrenador, this);
 
-            // Crear y mostrar la nueva escena
+            // crea y muestra la nueva escena
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
