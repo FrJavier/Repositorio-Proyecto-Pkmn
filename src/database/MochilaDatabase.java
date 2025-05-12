@@ -11,7 +11,7 @@ import model.Entrenador;
 import model.mochila;
 
 public class MochilaDatabase {
-
+	
 	public void cargarObjetos(Entrenador entrenador) {
 		
 	}
