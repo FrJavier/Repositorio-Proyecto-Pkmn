@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/José Tomás/Documents/GitHub/Repositorio-Proyecto-Pkmn/mysql-connector/mysql-connector-j-8.3.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -17,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/JavaFx/javafx-sdk-23.0.2/lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="C:/JavaFx/javafx-sdk-23.0.2/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="C:/JavaFx/javafx-sdk-23.0.2/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="mysql-connector/mysql-connector-j-8.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

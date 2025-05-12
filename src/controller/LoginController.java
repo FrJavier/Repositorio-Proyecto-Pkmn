@@ -31,7 +31,8 @@ import controller.Menu;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.cj.protocol.Resultset;
+import java.sql.ResultSet;
+
 
 public class LoginController {
 	@FXML
