@@ -1,33 +1,41 @@
 package model;
 
-public class movimiento {
+public abstract class movimiento {
 	
 	private int id_movimiento;
 	private String nom_movimiento;
-	private int nivel_aprendizaje;
-	private int pp_max;
-	private String tipo;
-	private int potencia;
-	private String estado;
 	private int turnos;
-	private int num;
 	
-	public enum TipoMovimiento {
-	    NORMAL,
-	    FUEGO,
-	    AGUA,
-	    PLANTA,
-	    ELECTRICO,
-	    HIELO,
-	    LUCHA,
-	    VENENO,
-	    TIERRA,
-	    VOLADOR,
-	    PSIQUICO,
-	    BICHO,
-	    ROCA,
-	    FANTASMA,
-	    DRAGON;
+	
+	public int getId_movimiento() {
+		return id_movimiento;
 	}
+	public void setId_movimiento(int id_movimiento) {
+		this.id_movimiento = id_movimiento;
+	}
+	public String getNom_movimiento() {
+		return nom_movimiento;
+	}
+	public void setNom_movimiento(String nom_movimiento) {
+		this.nom_movimiento = nom_movimiento;
+	}
+	public int getTurnos() {
+		return turnos;
+	}
+	public void setTurnos(int turnos) {
+		this.turnos = turnos;
+	}
+	
+	public abstract void ejecutar(pokemon atacante, pokemon objetivo);
+
+	public boolean calcularProbabilidad() {
+
+		double random = Math.random();
+
+				return random < 0.5;
+	}
+	
+	
+	
 
 }
