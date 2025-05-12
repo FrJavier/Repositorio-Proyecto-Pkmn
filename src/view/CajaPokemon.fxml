@@ -14,7 +14,7 @@
          <children>
             <ImageView fitHeight="411.0" fitWidth="600.0">
                <image>
-                  <Image url="@CajaFondo.png" />
+                  <Image url="@../../img/CajaFondo.png" />
                </image>
             </ImageView>
             <ImageView id="primerPolemonEquipo" fx:id="pokemonEquipoUno" fitHeight="99.0" fitWidth="154.0" layoutX="67.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
@@ -25,12 +25,12 @@
             <ImageView id="sextoPokemonEquipo" fx:id="pokemonEquipoSeis" fitHeight="99.0" fitWidth="154.0" layoutX="400.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView id="volverMenuCaja" fx:id="volverMenuCaja" fitHeight="34.0" fitWidth="109.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Volver-6-5-2025%20(2).gif" />
+                  <Image url="@../../img/Volver-6-5-2025%20(2).gif" />
                </image>
             </ImageView>
             <ImageView id="btnCajaPkm" fx:id="btnCajaPkm" fitHeight="58.0" fitWidth="96.0" layoutX="259.0" layoutY="353.0">
                <image>
-                  <Image url="@Caja-6-5-2025.gif" />
+                  <Image url="@../../img/Caja-6-5-2025.gif" />
                </image>
             </ImageView>
             <ProgressBar id="BarravidaPkmUno" fx:id="vitalidadPkmUno" layoutX="86.0" layoutY="150.0" prefHeight="18.0" prefWidth="96.0" progress="0.35" />
