@@ -1,21 +1,29 @@
 package controller;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Entrenador;
+import model.mochila;
+import database.DatabaseConnection;
+import database.EntrenadorDatabase;
 
 public class PokemonCapturaController {
+
 
     @FXML
     private ImageView imgCapturaPokemon;
 
     @FXML
-    private ImageView imgCuadro;
+    private ImageView imgCaturar;
 
     @FXML
     private ImageView imgPokemonCaptura;
@@ -25,6 +33,9 @@ public class PokemonCapturaController {
 
     @FXML
     private ImageView imgSalir;
+
+    @FXML
+    private Label lblNumeroPokebolas;
 
     //Init--------------------------------------------------------------------------
     //variables necesarias para iniciar el init
@@ -57,6 +68,33 @@ public class PokemonCapturaController {
             e.printStackTrace();
         }
     }
-
+    
     //------------------------------------------------------------------------------
+
+    @FXML
+    void capturar(MouseEvent event) {
+
+    }
+    
+    //Poner pokebolas
+    
+	private void obtenerPokeballs() {
+		try (Connection conexion = DatabaseConnection.getConnection()) {
+			ArrayList<mochila> mochila = MochilaBD.obtenerMochila(entrenador.getIdEntrenador());
+			for (Mochila objeto : mochila) {
+				if(objeto.getIdObjeto() == ID_POKEBOLA) {
+					pokebolas = objeto.getCantidad();
+					break;
+				}
+			}
+			actualizarLblPokebolas();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void establecer() {
+		lblNumeroPokebolas.setText(String.valueOf(pokebolas));
+	}
 }
