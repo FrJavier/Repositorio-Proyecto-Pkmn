@@ -16,13 +16,13 @@
          <children>
             <ImageView id="Fondocp" fitHeight="400.0" fitWidth="609.0">
                <image>
-                  <Image url="@andre-brtnh-bertanha-pk-center-painting-animado.gif" />
+                  <Image url="@../../img/andre-brtnh-bertanha-pk-center-painting-animado.gif" />
                </image>
             </ImageView>
             <ImageView id="imgPkmCp" fx:id="imgPkmCp" fitHeight="100.0" fitWidth="131.0" layoutX="71.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView id="btnSiguientePkmCp" fx:id="btnSiguientePkmCp" fitHeight="53.0" fitWidth="128.0" layoutX="66.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Siguiente-6-5-2025.png" />
+                  <Image url="@../../img/Siguiente-6-5-2025.png" />
                </image>
             </ImageView>
             <ProgressBar id="vitalidadPkmCp" fx:id="vitalidadPkmCp" layoutX="86.0" layoutY="171.0" prefHeight="18.0" prefWidth="91.0" progress="0.22" />
@@ -39,12 +39,12 @@
             </Pane>
             <ImageView id="MarcoOpcionsCp" fitHeight="250.0" fitWidth="250.0" layoutX="180.0" layoutY="121.0">
                <image>
-                  <Image url="@1956744_35675.png" />
+                  <Image url="@../../img/1956744_35675.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="389.0" layoutY="88.0">
                <image>
-                  <Image url="@imgPotaxioAlante.png" />
+                  <Image url="@../../img/imgPotaxioAlante.png" />
                </image>
             </ImageView>
          </children>
