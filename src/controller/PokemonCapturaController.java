@@ -15,6 +15,7 @@ import model.Entrenador;
 import model.mochila;
 import database.DatabaseConnection;
 import database.EntrenadorDatabase;
+import database.MochilaDatabase;
 
 public class PokemonCapturaController {
 
@@ -78,16 +79,19 @@ public class PokemonCapturaController {
     
     //Poner pokebolas
     
+	private int pokeballs = 0;
+
+	
 	private void obtenerPokeballs() {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
-			ArrayList<mochila> mochila = MochilaBD.obtenerMochila(entrenador.getIdEntrenador());
+			ArrayList<mochila> mochila = MochilaDatabase.cargarObjetos(this.entrenador);
 			for (Mochila objeto : mochila) {
 				if(objeto.getIdObjeto() == ID_POKEBOLA) {
-					pokebolas = objeto.getCantidad();
+					pokeballs = objeto.getCantidad();
 					break;
 				}
 			}
-			actualizarLblPokebolas();
+			establecer();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,6 +99,6 @@ public class PokemonCapturaController {
 	}
 	
 	private void establecer() {
-		lblNumeroPokebolas.setText(String.valueOf(pokebolas));
+		lblNumeroPokebolas.setText(String.valueOf(pokeballs));
 	}
 }
