@@ -1,6 +1,9 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -46,4 +49,23 @@ public class CentropokemonController {
     }
     //------------------------------------------------------------------------------
     
+    //Volver al menu----------------------------------------------------------------
+    @FXML
+    private void abrirMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+            Parent root = loader.load();
+
+            loader.setController(menu);
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------------------------------------------------------------------
 }

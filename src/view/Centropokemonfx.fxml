@@ -34,7 +34,7 @@
             <Pane layoutX="231.0" layoutY="171.0" prefHeight="150.0" prefWidth="148.0" style="-fx-background-color: lightgray;">
                <children>
                   <Button id="btnCurarCp" fx:id="btnCurarBoton" layoutX="17.0" layoutY="23.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" text="Curar" />
-                  <Button id="btnSalirCp" fx:id="btnSalircpBoton" layoutX="17.0" layoutY="86.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" text="Salir" />
+                  <Button id="btnSalirCp" fx:id="btnSalircpBoton" layoutX="17.0" layoutY="86.0" mnemonicParsing="false" onMouseClicked="#abrirMenu" prefHeight="44.0" prefWidth="118.0" text="Salir" />
                </children>
             </Pane>
             <ImageView id="MarcoOpcionsCp" fitHeight="250.0" fitWidth="250.0" layoutX="180.0" layoutY="121.0">
