@@ -17,7 +17,7 @@ public class Entrenador {
 	
 	private LinkedList<pokemon> equipo;
 	private LinkedList<Caja> caja;
-	private LinkedList <mochila> mochila;
+	private LinkedList <Mochila> Mochila;
 	
 	
 	
@@ -51,7 +51,7 @@ public class Entrenador {
 	@Override
 	public String toString() {
 		return "Entrenador [id_entrenador=" + id_entrenador + ", usuario=" + usuario + ", pass=" + pass
-				+ ", pokedollares=" + pokedollares + ", equipo=" + equipo + ", caja=" + caja + ", mochila=" + mochila
+				+ ", pokedollares=" + pokedollares + ", equipo=" + equipo + ", caja=" + caja + ", mochila=" + Mochila
 				+ "]";
 	}
 	
@@ -71,7 +71,7 @@ public class Entrenador {
 		
 	}
 	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<pokemon> equipo,
-			LinkedList<Caja> caja, LinkedList<model.mochila> mochila) {
+			LinkedList<Caja> caja, LinkedList<model.Mochila> Mochila) {
 		super();
 		this.id_entrenador = id_entrenador;
 		this.usuario = usuario;
@@ -79,7 +79,7 @@ public class Entrenador {
 		this.pokedollares = pokedollares;
 		this.equipo = equipo;
 		this.caja = caja;
-		this.mochila = mochila;
+		this.Mochila = Mochila;
 	}
 	
 	
