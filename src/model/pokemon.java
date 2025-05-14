@@ -30,7 +30,7 @@ public class pokemon {
 	private String SONIDO;
 	private static tipo tipo1;
 	private static tipo tipo2;
-	private objeto objeto;
+	private Objeto Objeto;
 	
 	public static LinkedList<movimiento> getMovimientos() {
 		return movimientos;
@@ -74,11 +74,11 @@ public class pokemon {
 	public static void setTipo2(tipo tipo2) {
 		pokemon.tipo2 = tipo2;
 	}
-	public objeto getObjeto() {
-		return objeto;
+	public Objeto getObjeto() {
+		return Objeto;
 	}
-	public void setObjeto(objeto objeto) {
-		this.objeto = objeto;
+	public void setObjeto(Objeto Objeto) {
+		this.Objeto = Objeto;
 	}
 	public int getId_pokemon() {
 		return id_pokemon;
@@ -185,7 +185,7 @@ public class pokemon {
 	public pokemon(int id_pokemon, int id_entrenador, int num_pokedex, String note, int vitalidad, int ataque,
 			int defensa, int atk_especial, int def_especial, int velocidad, int nivel, int fertilidad, char sexo,
 			String estado, int equipo, int id_objeto, String nombre, String iMG_Frontal, String iMG_Trasera,
-			int nIVEL_EVOLUCION, String sONIDO, model.objeto objeto) {
+			int nIVEL_EVOLUCION, String sONIDO, model.Objeto Objeto) {
 		super();
 		this.id_pokemon = id_pokemon;
 		this.id_entrenador = id_entrenador;
@@ -208,7 +208,7 @@ public class pokemon {
 		IMG_Trasera = iMG_Trasera;
 		NIVEL_EVOLUCION = nIVEL_EVOLUCION;
 		SONIDO = sONIDO;
-		this.objeto = objeto;
+		this.Objeto = Objeto;
 	}
 	
 	

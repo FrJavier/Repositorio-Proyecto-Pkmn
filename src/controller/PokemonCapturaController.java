@@ -12,7 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Entrenador;
-import model.mochila;
+import model.Mochila;
+import model.Objeto;
+
 import database.DatabaseConnection;
 import database.EntrenadorDatabase;
 import database.MochilaDatabase;
@@ -84,9 +86,9 @@ public class PokemonCapturaController {
 	
 	private void obtenerPokeballs() {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
-			ArrayList<mochila> mochila = MochilaDatabase.cargarObjetos(this.entrenador);
-			for (Mochila objeto : mochila) {
-				if(objeto.getIdObjeto() == ID_POKEBOLA) {
+			ArrayList<Mochila> Mochila = MochilaDatabase.cargarObjetos(this.entrenador);
+			for (Mochila objeto : Mochila) {
+				if(objeto.getId_objeto() == ID_POKEBOLA) {
 					pokeballs = objeto.getCantidad();
 					break;
 				}
