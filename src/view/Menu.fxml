@@ -53,7 +53,7 @@
                   <Image url="@../../img/imgMenu.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgPersonaje" fitHeight="104.0" fitWidth="96.0" layoutX="14.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPersonaje" fitHeight="93.0" fitWidth="99.0" layoutX="27.0" layoutY="165.0" onMouseClicked="#abrirEquipo" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgPotaxioAlante.png" />
                </image>
