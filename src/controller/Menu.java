@@ -166,6 +166,28 @@ public class Menu {
     	Stage stage=(Stage) btnSalir.getScene().getWindow();
     	stage.close();
     }
+   
+    
+    @FXML
+    private void abrirEquipo(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Equipopokemon.fxml"));
+            Parent root = loader.load();
+
+            // carga el ccontrolador de la tienda
+            EquipopokemonController EquipopokemonController = loader.getController();
+
+            // cambia la escena actual del stage por la otra nueva
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            EquipopokemonController.init(currentStage, entrenador, this);
+
+            // crea y enseña la nueva escena
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);  // esto es para cambiar en la misma ventana
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
     //Init--------------------------------------------------------------------------
     //variables necesarias para iniciar el init

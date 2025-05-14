@@ -72,7 +72,7 @@ public class PokemonDatabase {
 			}
 			
 			if(caja ==1) {
-				entrenador.setEquipoPrincipal(listadoPokemon);
+				entrenador.setEquipo(listadoPokemon);
 			}else {
 				entrenador.setPokemonCaja(listadoPokemon);
 			}
