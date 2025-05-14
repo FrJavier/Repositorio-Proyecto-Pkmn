@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 
 public class DatabaseConnection {
-	public Connection databaseLink;
+	public static Connection databaseLink;
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		String dataBaseName = "pokemones";
 		String dataBaseUser = "root";
 		String dataBasePass = "";

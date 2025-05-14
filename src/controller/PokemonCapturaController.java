@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import model.Entrenador;
 import model.Mochila;
 import model.Objeto;
-
+import model.Pokemon;
 import database.DatabaseConnection;
 import database.EntrenadorDatabase;
 import database.MochilaDatabase;
@@ -79,28 +79,40 @@ public class PokemonCapturaController {
 
     }
     
-    //Poner pokebolas
     
+	private Pokemon pokemon;
 	private int pokeballs = 0;
+	private final int ID_POKEBOLA = 8;
+
 
 	
-	private void obtenerPokeballs() {
+	private void cargarPokeballs() {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
-			ArrayList<Mochila> Mochila = MochilaDatabase.cargarObjetos(this.entrenador);
-			for (Mochila objeto : Mochila) {
-				if(objeto.getId_objeto() == ID_POKEBOLA) {
+			ArrayList<Mochila> mochila = MochilaDatabase.cargarObjetos(entrenador.getId_entrenador());
+			for (Mochila objeto : mochila) {
+				if(objeto.getIdObjeto() == ID_POKEBOLA) {
 					pokeballs = objeto.getCantidad();
 					break;
 				}
 			}
-			establecer();
+			actualizarLblPokeballs();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void establecer() {
+	private void actualizarLblPokeballs() {
 		lblNumeroPokebolas.setText(String.valueOf(pokeballs));
+		lblNumeroPokebolas.setStyle("-fx-font-size: 32px; -fx-text-fill: #ff0000;");
+	}
+	
+	private void actualizarPokeballsBD() {
+		try (Connection conexion = DatabaseConnection.getConnection()){
+			MochilaDatabase.actualizarCantidad(entrenador.getId_entrenador(), ID_POKEBOLA, pokeballs);
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

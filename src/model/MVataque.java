@@ -6,7 +6,7 @@ public class MVataque extends movimiento {
 	    private tipo tipo;
 
 	    @Override
-	    public void ejecutar(pokemon atacante, pokemon objetivo) {
+	    public void ejecutar(Pokemon atacante, Pokemon objetivo) {
 
 	    }
 

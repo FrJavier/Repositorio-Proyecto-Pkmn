@@ -68,5 +68,20 @@ public class Objeto {
 		this.pp_mov = pp_mov;
 	}
 	
+	public Objeto(int idObjeto, String nombreObjeto, int ataque, int defensa, int ataqueEspecial, int defensaEspecial,
+			int velocidad, int vitalidad, int pp, int precio, String rutaImagen, String descripcion) {
+		super();
+		this.id_objeto = id_objeto;
+		this.num_objeto = num_objeto;
+		this.ataque = ataque;
+		this.defensa = defensa;
+		this.at_especial = at_especial;
+		this.def_especial = def_especial;
+		this.velocidad = velocidad;
+		this.pp_mov = pp_mov;
+		this.precio = precio;
+		// hay que meterlo en la bbdd this.rutaImagen = rutaImagen;
+	}
+	
 	
 }

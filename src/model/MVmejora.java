@@ -3,7 +3,7 @@ package model;
 public class MVmejora extends movimiento {
 
 	@Override
-	public void ejecutar(pokemon atacante, pokemon objetivo) {	
+	public void ejecutar(Pokemon atacante, Pokemon objetivo) {	
 	}
 	
 	private int duracion;

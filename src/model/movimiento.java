@@ -26,7 +26,7 @@ public abstract class movimiento {
 		this.turnos = turnos;
 	}
 	
-	public abstract void ejecutar(pokemon atacante, pokemon objetivo);
+	public abstract void ejecutar(Pokemon atacante, Pokemon objetivo);
 
 	public boolean calcularProbabilidad() {
 

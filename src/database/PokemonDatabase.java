@@ -12,7 +12,7 @@ import java.util.Random;
 import controller.LoginController;
 import model.Entrenador;
 import model.movimiento;
-import model.pokemon;
+import model.Pokemon;
 import model.tipo;
 import database.DatabaseConnection;
 import javafx.stage.Stage;
@@ -49,10 +49,10 @@ public class PokemonDatabase {
 			ps.setInt(2, caja);
 			
 			ResultSet rs = ps.executeQuery();
-			LinkedList<pokemon> listadoPokemon = new LinkedList<pokemon>();
-			pokemon prueba;
+			LinkedList<Pokemon> listadoPokemon = new LinkedList<Pokemon>();
+			Pokemon prueba;
 			while (rs.next()) {
-				prueba = new pokemon();
+				prueba = new Pokemon();
 				prueba.setId_pokemon(rs.getInt(1));
 				prueba.setNum_pokedex(rs.getInt(2));
 				prueba.setNombre(rs.getString(3));

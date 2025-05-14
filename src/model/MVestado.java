@@ -38,7 +38,7 @@ public class MVestado extends movimiento{
 		}
 
 		@Override
-		public void ejecutar(pokemon atacante, pokemon objetivo) {
+		public void ejecutar(Pokemon atacante, Pokemon objetivo) {
 			// TODO Auto-generated method stub
 			
 		}

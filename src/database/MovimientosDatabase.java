@@ -10,7 +10,7 @@ import model.MVataque;
 import model.MVestado;
 import model.MVmejora;
 import model.movimiento;
-import model.pokemon;
+import model.Pokemon;
 import model.tipo;
 
 public class MovimientosDatabase {

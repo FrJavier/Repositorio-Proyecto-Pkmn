@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 import model.tipo;
 
-public class pokemon {
+public class Pokemon {
 	
 	private int id_pokemon;
 	private int id_entrenador;
@@ -36,7 +36,7 @@ public class pokemon {
 		return movimientos;
 	}
 	public static void setMovimientos(LinkedList<movimiento> movimientos) {
-		pokemon.movimientos = movimientos;
+		Pokemon.movimientos = movimientos;
 	}
 	public String getIMG_Frontal() {
 		return IMG_Frontal;
@@ -66,13 +66,13 @@ public class pokemon {
 		return tipo1;
 	}
 	public static void setTipo1(tipo tipo1) {
-		pokemon.tipo1 = tipo1;
+		Pokemon.tipo1 = tipo1;
 	}
 	public static tipo getTipo2() {
 		return tipo2;
 	}
 	public static void setTipo2(tipo tipo2) {
-		pokemon.tipo2 = tipo2;
+		Pokemon.tipo2 = tipo2;
 	}
 	public Objeto getObjeto() {
 		return Objeto;
@@ -182,7 +182,7 @@ public class pokemon {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public pokemon(int id_pokemon, int id_entrenador, int num_pokedex, String note, int vitalidad, int ataque,
+	public Pokemon(int id_pokemon, int id_entrenador, int num_pokedex, String note, int vitalidad, int ataque,
 			int defensa, int atk_especial, int def_especial, int velocidad, int nivel, int fertilidad, char sexo,
 			String estado, int equipo, int id_objeto, String nombre, String iMG_Frontal, String iMG_Trasera,
 			int nIVEL_EVOLUCION, String sONIDO, model.Objeto Objeto) {
@@ -212,7 +212,7 @@ public class pokemon {
 	}
 	
 	
-	public pokemon(int num_pokedex,String nombre,tipo tipo1, tipo tipo2, int NIVEL_EVOLUCION, String IMG_Frontal, String IMG_Trasera ) {
+	public Pokemon(int num_pokedex,String nombre,tipo tipo1, tipo tipo2, int NIVEL_EVOLUCION, String IMG_Frontal, String IMG_Trasera ) {
 		
 		this.num_pokedex=num_pokedex;
 		this.nombre=nombre;

@@ -15,7 +15,7 @@ public class Entrenador {
 	private String pass;
 	private int pokedollares;
 	
-	private LinkedList<pokemon> equipo;
+	private LinkedList<Pokemon> equipo;
 	private LinkedList<Caja> caja;
 	private LinkedList <Mochila> Mochila;
 	
@@ -70,7 +70,7 @@ public class Entrenador {
 		this.pass = pass;
 		
 	}
-	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<pokemon> equipo,
+	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<Pokemon> equipo,
 			LinkedList<Caja> caja, LinkedList<model.Mochila> Mochila) {
 		super();
 		this.id_entrenador = id_entrenador;
