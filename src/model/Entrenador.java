@@ -82,7 +82,26 @@ public class Entrenador {
 		this.Mochila = Mochila;
 	}
 	
+	public int getDinero () {
+		return this.pokedollares;
+	}
 	
+	public void setDinero (int dinero) {
+		this.pokedollares = dinero;
+	}
+	
+	
+	public void agregarObjeto(String nombreObjeto) {
+		for (Mochila m : Mochila) {
+			if (m.getNombre().equalsIgnoreCase(nombreObjeto)) {
+				m.setCantidad(m.getCantidad() + 1);
+				return;
+			}
+		}
+		
+		Mochila nuevo = new Mochila (nombreObjeto, 1);
+		Mochila.add(nuevo);
+	}
 	
 
 	

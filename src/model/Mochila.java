@@ -2,30 +2,22 @@ package model;
 
 public class Mochila {
 
-    private int id_entrenador;
-    private int id_objeto;
+    private String nombre;
     private int cantidad;
-    
-    public Mochila(int id_entrenador, int idObjeto, int cantidad) {
-        this.id_entrenador = id_entrenador;
-        this.id_objeto = idObjeto;
+
+    // Constructor
+    public Mochila(String nombre, int cantidad) {
+        this.nombre = nombre;
         this.cantidad = cantidad;
     }
-    
-    public int getIdEntrenador() {
-        return id_entrenador;
+
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setIdEntrenador(int idEntrenador) {
-        this.id_entrenador = idEntrenador;
-    }
-
-    public int getIdObjeto() {
-        return id_objeto;
-    }
-
-    public void setIdObjeto(int idObjeto) {
-        this.id_objeto = idObjeto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getCantidad() {
@@ -36,4 +28,9 @@ public class Mochila {
         this.cantidad = cantidad;
     }
 
+    // para ver en consola mas facilmente
+    @Override
+    public String toString() {
+        return "Objeto: " + nombre + ", Cantidad: " + cantidad;
+    }
 }
