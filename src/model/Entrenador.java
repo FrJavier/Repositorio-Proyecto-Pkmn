@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
+import database.DatabaseConnection;
 import database.MochilaDatabase;
 
 public class Entrenador {
@@ -130,14 +131,23 @@ public class Entrenador {
 	}
 
 	public void agregarObjeto(String nombreObjeto) {
-		for (Mochila m : Mochila) {
-			if (m.getNombre().equalsIgnoreCase(nombreObjeto)) {
-				m.setCantidad(m.getCantidad() + 1);
-				return;
-			}
-		}
+		mochila.agregar(nombreObjeto);
+	    
+	    try (Connection conexion = DatabaseConnection.getConnection()) {
+	        String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
+	        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	            stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
+	            stmt.setString(2, nombreObjeto);
+	            stmt.executeUpdate();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
-	
+
+	private Mochila mochila;
+
+
 
 public void cargarMochila() {
     Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
