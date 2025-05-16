@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+
+import database.MochilaDatabase;
 
 public class Entrenador {
 
@@ -17,7 +20,7 @@ public class Entrenador {
 
 	private LinkedList<Pokemon> equipo;
 	private LinkedList<Caja> caja;
-	private LinkedList<Mochila> Mochila;
+	private ArrayList<Mochila> Mochila;
 
 	public int getId_entrenador() {
 		return id_entrenador;
@@ -74,7 +77,7 @@ public class Entrenador {
 	}
 
 	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<Pokemon> equipo,
-			LinkedList<Caja> caja, LinkedList<model.Mochila> Mochila) {
+			LinkedList<Caja> caja, ArrayList<model.Mochila> Mochila) {
 		super();
 		this.id_entrenador = id_entrenador;
 		this.usuario = usuario;
@@ -134,5 +137,10 @@ public class Entrenador {
 			}
 		}
 	}
+	
+
+public void cargarMochila() {
+    Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
+}
 
 }

@@ -15,72 +15,65 @@ import model.Objeto;
 
 public class MochilaDatabase {
 	
-	 public static LinkedList<Objeto> crearMochilaInicial(int idEntrenador) {
-	        LinkedList<Objeto> mochilaInicial = new LinkedList<>();
+	static int id_entrenador;
+	
+	
 
-	        try (Connection con = DatabaseConnection.getConnection()) {
-	           
-	            String sqlObjetos = "SELECT * FROM OBJETO WHERE ID_OBJETO != 0"; // Excluir el objeto "Ninguno"
-	            PreparedStatement stmtObjetos = con.prepareStatement(sqlObjetos);
-	            ResultSet rsObjetos = stmtObjetos.executeQuery();
+	    public static ArrayList<Mochila> cargarObjetos(int idEntrenador) {
+	        ArrayList<Mochila> mochila = new ArrayList<>();
+	        String sql = "SELECT id_objeto, cantidad FROM mochila WHERE id_entrenador = ?";
 
-	            String sqlMochila = "INSERT INTO MOCHILA (ID_ENTRENADOR, ID_OBJETO, CANTIDAD) VALUES (?, ?, ?)";
-	            PreparedStatement stmtMochila = con.prepareStatement(sqlMochila);
+	        try (Connection conn = DatabaseConnection.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-	            while (rsObjetos.next()) {
-	                int idObjeto = rsObjetos.getInt("ID_OBJETO");
-	                String nombreObjeto = rsObjetos.getString("NOM_OBJETO");
-	                int cantidadInicial = (idObjeto == 8) ? 20 : 0; //Pokeball, cantidad inicial de 20
+	            stmt.setInt(1, idEntrenador);
+	            ResultSet rs = stmt.executeQuery();
 
-	                stmtMochila.setInt(1, idEntrenador);
-	                stmtMochila.setInt(2, idObjeto);
-	                stmtMochila.setInt(3, cantidadInicial);
-	                stmtMochila.executeUpdate();
-
-	                Objeto objeto = new Objeto(
-	                    idObjeto,
-	                    nombreObjeto,
-	                    rsObjetos.getInt("ATAQUE"),
-	                    rsObjetos.getInt("DEFENSA"),
-	                    rsObjetos.getInt("AT_ESPECIAL"),
-	                    rsObjetos.getInt("DEF_ESPECIAL"),
-	                    rsObjetos.getInt("VELOCIDAD"),
-	                    rsObjetos.getInt("VITALIDAD"),
-	                    rsObjetos.getInt("PP"),
-	                    rsObjetos.getInt("PRECIO"),
-	                    rsObjetos.getString("RUTA_IMAGEN"),
-	                    rsObjetos.getString("DESCRIPCION")
-	                );
-	                mochilaInicial.add(objeto);
+	            while (rs.next()) {
+	                int idObjeto = rs.getInt("id_objeto");
+	                int cantidad = rs.getInt("cantidad");
+	                mochila.add(new Mochila(idEntrenador, idObjeto, cantidad));
 	            }
-	        } catch (Exception e) {
+	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 
-	        return mochilaInicial;
+	        return mochila;
 	    }
-	
-    public static ArrayList<Mochila> cargarObjetos(int idEntrenador) {
-        ArrayList<Mochila> mochila = new ArrayList<>();
-        try (Connection con = DatabaseConnection.getConnection()) {
-            String sql = "SELECT * FROM MOCHILA WHERE ID_ENTRENADOR = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idEntrenador);
-            ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                mochila.add(new Mochila(
-                    rs.getInt("ID_ENTRENADOR"),
-                    rs.getInt("ID_OBJETO"),
-                    rs.getInt("CANTIDAD")
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mochila;
-    }
-	
+	    public static void agregarObjeto(int idEntrenador, int idObjeto, int cantidadAgregar) {
+	        String sqlExiste = "SELECT cantidad FROM mochila WHERE id_entrenador = ? AND id_objeto = ?";
+	        String sqlInsertar = "INSERT INTO mochila (id_entrenador, id_objeto, cantidad) VALUES (?, ?, ?)";
+	        String sqlActualizar = "UPDATE mochila SET cantidad = ? WHERE id_entrenador = ? AND id_objeto = ?";
+
+	        try (Connection conn = DatabaseConnection.getConnection()) {
+	            PreparedStatement stmtExiste = conn.prepareStatement(sqlExiste);
+	            stmtExiste.setInt(1, idEntrenador);
+	            stmtExiste.setInt(2, idObjeto);
+	            ResultSet rs = stmtExiste.executeQuery();
+
+	            if (rs.next()) {
+	                int cantidadActual = rs.getInt("cantidad");
+	                int nuevaCantidad = cantidadActual + cantidadAgregar;
+
+	                PreparedStatement stmtActualizar = conn.prepareStatement(sqlActualizar);
+	                stmtActualizar.setInt(1, nuevaCantidad);
+	                stmtActualizar.setInt(2, idEntrenador);
+	                stmtActualizar.setInt(3, idObjeto);
+	                stmtActualizar.executeUpdate();
+	            } else {
+	                PreparedStatement stmtInsertar = conn.prepareStatement(sqlInsertar);
+	                stmtInsertar.setInt(1, idEntrenador);
+	                stmtInsertar.setInt(2, idObjeto);
+	                stmtInsertar.setInt(3, cantidadAgregar);
+	                stmtInsertar.executeUpdate();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    
     public static boolean actualizarCantidad(int idEntrenador, int idObjeto, int nuevaCantidad) {
         try (Connection con = DatabaseConnection.getConnection()) {
         	//Si es cerro no aparece
@@ -113,5 +106,11 @@ public class MochilaDatabase {
             return false;
         }
     }
+    public static void crearmochilanueva(int Entrenador) {
+		agregarObjeto(id_entrenador,8,10 );
+		agregarObjeto(id_entrenador,1,1);
+    }
+    
+    
 }
 

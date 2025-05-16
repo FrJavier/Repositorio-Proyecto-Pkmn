@@ -67,9 +67,12 @@ public class PokemonCapturaController {
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;
         this.entrenador = entrenador;  // guarda el entrenador
-        this.menu = menu;  // guarda el controlador del menu
+        this.menu = menu;// guarda el controlador del menu
+        cargarPokeballs();
+        System.out.println("ID ENTRENADOR: " + entrenador.getId_entrenador());
+
     }
-    //------------------------------------------------------------------------------
+    //------------------------SS------------------------------------------------------
     
     //Volver al menu----------------------------------------------------------------
     @FXML
@@ -107,8 +110,10 @@ public class PokemonCapturaController {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
 			ArrayList<Mochila> mochila = MochilaDatabase.cargarObjetos(entrenador.getId_entrenador());
 			for (Mochila objeto : mochila) {
-				if(objeto.getIdObjeto() == ID_POKEBOLA) {
+				if(objeto.getIdObjeto() == 8) {
 					pokeballs = objeto.getCantidad();
+			        System.out.println("Pokéballs encontradas: " + pokeballs);
+
 					break;
 				}
 			}
@@ -181,10 +186,12 @@ public class PokemonCapturaController {
 
 	
 	public void capturarPkmn(MouseEvent  event) {
+		
+	
+
 	    if (pokeballs > 0 && pokemon != null) {
 	        pokeballs--;
-	        actualizarLblPokeballs();
-	        actualizarPokeballsBD();
+	        
 
 	        entrenador.agregarPokemonAlEquipo(pokemon);
 
