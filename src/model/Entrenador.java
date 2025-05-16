@@ -143,4 +143,6 @@ public void cargarMochila() {
     Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
 }
 
+
+
 }

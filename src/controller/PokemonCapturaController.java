@@ -32,178 +32,183 @@ import database.EntrenadorDatabase;
 import database.MochilaDatabase;
 
 public class PokemonCapturaController {
-	
+
 	@FXML
-    private Button btnGenerar;
+	private Button btnGenerar;
 
-    @FXML
-    private ImageView imgCapturaPokemon;
+	@FXML
+	private ImageView imgCapturaPokemon;
 
-    @FXML
-    private ImageView imgCaturar;
+	@FXML
+	private ImageView imgCaturar;
 
-    @FXML
-    private ImageView imgPokemonCaptura;
+	@FXML
+	private ImageView imgPokemonCaptura;
 
-    @FXML
-    private ImageView imgPotaxioAtras;
+	@FXML
+	private ImageView imgPotaxioAtras;
 
-    @FXML
-    private ImageView imgSalir;
+	@FXML
+	private ImageView imgSalir;
 
-    @FXML
-    private Label lblNumeroPokebolas;
-    
-    @FXML
-    private Label lbltxtpkmncptura;
+	@FXML
+	private Label lblNumeroPokebolas;
 
-    //Init--------------------------------------------------------------------------
-    //variables necesarias para iniciar el init
-    private Menu menu;
-    private Entrenador entrenador;
-    private Stage stage;
-    Random azar=new Random();
-    //metodo
-    public void init(Stage stage, Entrenador entrenador, Menu menu) {
-        this.stage = stage;
-        this.entrenador = entrenador;  // guarda el entrenador
-        this.menu = menu;// guarda el controlador del menu
-        cargarPokeballs();
-        System.out.println("ID ENTRENADOR: " + entrenador.getId_entrenador());
+	@FXML
+	private Label lbltxtpkmncptura;
 
-    }
-    //------------------------SS------------------------------------------------------
-    
-    //Volver al menu----------------------------------------------------------------
-    @FXML
-    private void abrirMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
-            Parent root = loader.load();
+	// Init--------------------------------------------------------------------------
+	// variables necesarias para iniciar el init
+	private Menu menu;
+	private Entrenador entrenador;
+	private Stage stage;
+	Random azar = new Random();
 
-            loader.setController(menu);
+	// metodo
+	public void init(Stage stage, Entrenador entrenador, Menu menu) {
+		this.stage = stage;
+		this.entrenador = entrenador; // guarda el entrenador
+		this.menu = menu;// guarda el controlador del menu
+		cargarPokeballs();
+		
+	}
+	// ------------------------SS------------------------------------------------------
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+	// Volver al
+	// menu----------------------------------------------------------------
+	@FXML
+	private void abrirMenu() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    //------------------------------------------------------------------------------
+			Parent root = loader.load();
 
-    @FXML
-    void capturar(MouseEvent event) {
+			Menu controller = loader.getController();
+			controller.init(stage, entrenador);
 
-    }
-    
-    
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// ------------------------------------------------------------------------------
+
+	@FXML
+	void capturar() {
+
+	}
+
 	private Pokemon pokemon;
 	private int pokeballs = 0;
 	private final int ID_POKEBOLA = 8;
 
-
-	
 	private void cargarPokeballs() {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
 			ArrayList<Mochila> mochila = MochilaDatabase.cargarObjetos(entrenador.getId_entrenador());
 			for (Mochila objeto : mochila) {
-				if(objeto.getIdObjeto() == 8) {
+				if (objeto.getIdObjeto() == 8) {
 					pokeballs = objeto.getCantidad();
-			        System.out.println("Pokéballs encontradas: " + pokeballs);
+			
 
 					break;
 				}
 			}
 			actualizarLblPokeballs();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void actualizarLblPokeballs() {
 		lblNumeroPokebolas.setText(String.valueOf(pokeballs));
 		lblNumeroPokebolas.setStyle("-fx-font-size: 32px; -fx-text-fill: #ff0000;");
 	}
-	
+
 	private void actualizarPokeballsBD() {
-		try (Connection conexion = DatabaseConnection.getConnection()){
+		try (Connection conexion = DatabaseConnection.getConnection()) {
 			MochilaDatabase.actualizarCantidad(entrenador.getId_entrenador(), ID_POKEBOLA, pokeballs);
-		
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//Generar pokemon
+
+	// Generar pokemon
 	@FXML
 	public void generarPokemon(ActionEvent event) {
-	    Random azar = new Random();  // <- Este faltaba
-	    int pokemonid = azar.nextInt(151) + 1;
+		Random azar = new Random(); // <- Este faltaba
+		int pokemonid = azar.nextInt(151) + 1;
 
-	    String sql = "SELECT IMG_Frontal,nombre FROM pokedex WHERE num_pokedex = " + pokemonid;
+		String sql = "SELECT IMG_Frontal,nombre FROM pokedex WHERE num_pokedex = " + pokemonid;
 
-	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones","root","");
-	         Statement stmt = conn.createStatement();
-	         ResultSet rs = stmt.executeQuery(sql)) {
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", "");
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)) {
 
-	        if (rs.next()) {
-	            String imgFrontal = rs.getString("IMG_Frontal");
-	            String nombre = rs.getString("nombre");
-	            File archivo=new File (imgFrontal);
-	            Image image = new Image(archivo.toURI().toString());
-	            imgPokemonCaptura.setVisible(true);
-	            
-	            lbltxtpkmncptura.setVisible(true);
-	            imgPokemonCaptura.setImage(image);
-	            lbltxtpkmncptura.setText(nombre);
-	        } else {
-	            System.out.println("No se encontró un Pokémon con ID: " + pokemonid);
-	        }
+			if (rs.next()) {
+				String imgFrontal = rs.getString("IMG_Frontal");
+				String nombre = rs.getString("nombre");
+				File archivo = new File(imgFrontal);
+				Image image = new Image(archivo.toURI().toString());
+				pokemon = new Pokemon();
+				pokemon.setNombre(nombre);
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-	private void abrirTienda(Stage stage, Entrenador entrenador) {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
-	        Parent root = loader.load();
+				imgPokemonCaptura.setVisible(true);
 
-	        TiendaController tiendaController = loader.getController();
-	        tiendaController.init(stage, entrenador, this);
+				lbltxtpkmncptura.setVisible(true);
+				imgPokemonCaptura.setImage(image);
+				lbltxtpkmncptura.setText(nombre);
 
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-
-	
-	public void capturarPkmn(MouseEvent  event) {
-		
-	
-
-	    if (pokeballs > 0 && pokemon != null) {
-	        pokeballs--;
-	        
-
-	        entrenador.agregarPokemonAlEquipo(pokemon);
-
-	        System.out.println("¡Pokémon capturado y agregado al entrenador: " + entrenador.getUsuario() + "!");
-	    } else {
-	    	int opcion = JOptionPane.showConfirmDialog(null, "NO TIENES POKEBALLS COMPRA ANDA");
-	    	if (opcion == JOptionPane.YES_OPTION) {
-	    	    abrirTienda(stage, entrenador);
-	    	}
-				
-
+			} else {
+				System.out.println("No se encontró un Pokémon con ID: " + pokemonid);
 			}
-	    }
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
+	private void abrirTienda(Stage stage, Entrenador entrenador) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
+			Parent root = loader.load();
+
+			TiendaController tiendaController = loader.getController();
+			tiendaController.init(stage, entrenador, this);
+
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void capturarPkmn(MouseEvent event) {
+
+		if (pokeballs > 0 && pokemon != null) {
+			pokeballs--;
+			actualizarLblPokeballs();
+			actualizarPokeballsBD();
+			entrenador.agregarPokemonAlEquipo(pokemon);
+
+			System.out.println("¡Pokémon capturado y agregado al entrenador: " + entrenador.getUsuario() + "!");
+
+			generarPokemon(null);
+
+		} else {
+			JOptionPane.showMessageDialog(null, "NO TIENES POKEBALLS COMPRA ANDA");
+			
+		}
+	}
+
+	public void setEntrenador(Entrenador entrenador) {
+		this.entrenador = entrenador;
+	}
+
+}

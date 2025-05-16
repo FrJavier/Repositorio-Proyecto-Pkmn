@@ -201,5 +201,17 @@ public class Menu {
 	}
     //------------------------------------------------------------------------------
 
+	public void setEntrenador(Entrenador entrenador) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void init(Stage stage, Entrenador entrenador) {
+	    this.stage = stage;
+	    this.entrenador = entrenador;
+	}
+
+
+	
 
 }
