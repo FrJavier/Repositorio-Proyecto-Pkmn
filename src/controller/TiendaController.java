@@ -139,8 +139,8 @@ public class TiendaController {
 			String nombreObjeto = objetoPorImagen.get(clicado);
 			int precio = precios.get(nombreObjeto);
 
-			if (entrenador.getDinero() >= precio) {
-				entrenador.setDinero(entrenador.getDinero() - precio);
+			if (entrenador.getPokedollares() >= precio) {
+				entrenador.setPokedollares(entrenador.getPokedollares()- precio);
 				entrenador.agregarObjeto(nombreObjeto);
 				mostrarAlerta("Compra exitosa", "Has comprado un " + nombreObjeto + " por " + precio + " pokedólares.");
 			} else {
