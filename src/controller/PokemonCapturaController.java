@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -70,7 +69,7 @@ public class PokemonCapturaController {
 		this.entrenador = entrenador; // guarda el entrenador
 		this.menu = menu;// guarda el controlador del menu
 		cargarPokeballs();
-		
+
 	}
 	// ------------------------SS------------------------------------------------------
 
@@ -112,7 +111,6 @@ public class PokemonCapturaController {
 			for (Mochila objeto : mochila) {
 				if (objeto.getIdObjeto() == 8) {
 					pokeballs = objeto.getCantidad();
-			
 
 					break;
 				}
@@ -141,7 +139,7 @@ public class PokemonCapturaController {
 	// Generar pokemon
 	@FXML
 	public void generarPokemon(ActionEvent event) {
-		Random azar = new Random(); // <- Este faltaba
+		Random azar = new Random();
 		int pokemonid = azar.nextInt(151) + 1;
 
 		String sql = "SELECT IMG_Frontal,nombre FROM pokedex WHERE num_pokedex = " + pokemonid;
@@ -173,37 +171,33 @@ public class PokemonCapturaController {
 		}
 	}
 
-	private void abrirTienda(Stage stage, Entrenador entrenador) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
-			Parent root = loader.load();
-
-			TiendaController tiendaController = loader.getController();
-			tiendaController.init(stage, entrenador, this);
-
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void capturarPkmn(MouseEvent event) {
 
 		if (pokeballs > 0 && pokemon != null) {
 			pokeballs--;
 			actualizarLblPokeballs();
 			actualizarPokeballsBD();
-			entrenador.agregarPokemonAlEquipo(pokemon);
+			Random azar = new Random();
+			int suerte = azar.nextInt(10) + 1;
+			if (suerte <= 5) {
 
-			System.out.println("¡Pokémon capturado y agregado al entrenador: " + entrenador.getUsuario() + "!");
-
-			generarPokemon(null);
+				JOptionPane.showMessageDialog(null, "SE TE HA ESCAPAO XD");
+				generarPokemon(null);
+			} else {
+				int opcion = JOptionPane.showConfirmDialog(null, "POKEMON "+ pokemon.getNombre()+" CAPTURAO ¿QUIERES PONERLE UN MOTE?");
+				
+				if(opcion==JOptionPane.YES_OPTION) {
+					String mote = JOptionPane.showInputDialog(null, "¿QUE MOTE LE QUIERES PONER?");
+					
+					pokemon.setNote(mote);
+				}
+				entrenador.agregarPokemonAlEquipo(pokemon);
+				generarPokemon(null);
+			}
 
 		} else {
 			JOptionPane.showMessageDialog(null, "NO TIENES POKEBALLS COMPRA ANDA");
-			
+
 		}
 	}
 

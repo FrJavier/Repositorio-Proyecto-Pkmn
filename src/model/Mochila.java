@@ -78,7 +78,12 @@ public class Mochila {
                 """;
 
             try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-                stmt.setInt(1, idEntrenador);
+                try {
+					stmt.setInt(1, idEntrenador);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 stmt.setInt(2, idObjeto);
                 stmt.executeUpdate();
             }
