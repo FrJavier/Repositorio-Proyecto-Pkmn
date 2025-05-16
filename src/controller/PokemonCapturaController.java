@@ -1,6 +1,12 @@
 package controller;
 
+import java.io.File;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.*;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -8,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,7 +29,9 @@ import database.EntrenadorDatabase;
 import database.MochilaDatabase;
 
 public class PokemonCapturaController {
-
+	
+	@FXML
+    private Button btnGenerar;
 
     @FXML
     private ImageView imgCapturaPokemon;
@@ -40,13 +50,16 @@ public class PokemonCapturaController {
 
     @FXML
     private Label lblNumeroPokebolas;
+    
+    @FXML
+    private Label lbltxtpkmncptura;
 
     //Init--------------------------------------------------------------------------
     //variables necesarias para iniciar el init
     private Menu menu;
     private Entrenador entrenador;
     private Stage stage;
- 
+    Random azar=new Random();
     //metodo
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;
@@ -119,48 +132,32 @@ public class PokemonCapturaController {
 	
 	//Generar pokemon
 	@FXML
-	void generarPokemon(ActionEvent event) {
-		System.out.println("Se ha accionado el boton de generar");
+	public void generarPokemon(ActionEvent event) {
+	    Random azar = new Random();  // <- Este faltaba
+	    int pokemonid = azar.nextInt(151) + 1;
 
-		DatabaseConnection con = new DatabaseConnection();
+	    String sql = "SELECT IMG_Frontal,nombre FROM pokedex WHERE num_pokedex = " + pokemonid;
 
-		Connection conexion = con.getConnection();
+	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones","root","");
+	         Statement stmt = conn.createStatement();
+	         ResultSet rs = stmt.executeQuery(sql)) {
 
-		try {
+	        if (rs.next()) {
+	            String imgFrontal = rs.getString("IMG_Frontal");
+	            String nombre = rs.getString("nombre");
+	            File archivo=new File (imgFrontal);
+	            Image image = new Image(archivo.toURI().toString());
+	            imgPokemonCaptura.setVisible(true);
+	            
+	            lbltxtpkmncptura.setVisible(true);
+	            imgPokemonCaptura.setImage(image);
+	            lbltxtpkmncptura.setText(nombre);
+	        } else {
+	            System.out.println("No se encontró un Pokémon con ID: " + pokemonid);
+	        }
 
-			pokemonCreado = PokemonBD.generarPokemonCaptura(entrenador.getIdEntrenador(), conexion);
-
-			if (pokemonCreado != null) {
-				String archivo = pokemonCreado.getNum_pokedex() + ".png";
-				String ruta = "multimedia/imagenes/delanteras/" + archivo;
-				File file = new File(ruta);
-
-				if (!file.exists()) {
-					System.out.println("No se encontró la imagen: " + archivo);
-					lblPokemon.setText("No se pudo cargar" + archivo);
-					lblPokemon.setGraphic(null);
-
-				}
-
-				Image imagen = new Image(file.toURI().toString());
-				ImageView imageView = new ImageView(imagen);
-				imageView.setFitWidth(120);
-				imageView.setFitHeight(120);
-				imageView.setPreserveRatio(true);
-
-				lblPokemon.setText("");
-				lblPokemon.setGraphic(imageView);
-
-			} else {
-				lblPokemon.setText("Error al generar el pokemon.");
-			}
-
-		} catch (Exception e) {
-			System.err.println("Error generando Pokemon: " + e.getMessage());
-			e.printStackTrace();
-			lblPokemon.setText("Error al conectar con la Base de Datos");
-		}
-
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
-	
 }
