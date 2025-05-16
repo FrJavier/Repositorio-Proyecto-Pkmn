@@ -52,7 +52,7 @@ public class Mochila {
         return "Objeto: " + nombre + ", Cantidad: " + cantidad;
     }
     
-    public static void agregarObjeto(int idEntrenador, String nombreObjeto) {
+    public static void agregarObjeto( String nombreObjeto) {
         try (Connection conexion = DatabaseConnection.getConnection()) {
 
             // Paso 1: Obtener el id del objeto por su nombre
