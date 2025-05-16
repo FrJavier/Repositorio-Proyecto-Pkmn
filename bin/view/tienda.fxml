@@ -56,37 +56,37 @@
                   <Image url="@../../img/imgEstanteria.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjAnillo" fitHeight="43.0" fitWidth="38.0" layoutX="427.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjAnillo" fitHeight="43.0" fitWidth="38.0" layoutX="427.0" layoutY="131.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjAnilloUnico.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjBaston" fitHeight="150.0" fitWidth="200.0" layoutX="538.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjBaston" fitHeight="150.0" fitWidth="200.0" layoutX="538.0" layoutY="126.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjBaston.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjChaleco" fitHeight="104.0" fitWidth="85.0" layoutX="541.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjChaleco" fitHeight="104.0" fitWidth="85.0" layoutX="541.0" layoutY="253.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjChaleco.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjEter" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjEter" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="171.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjEter.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjPesa" fitHeight="51.0" fitWidth="38.0" layoutX="470.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjPesa" fitHeight="51.0" fitWidth="38.0" layoutX="470.0" layoutY="288.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjPesa.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjPila" fitHeight="76.0" fitWidth="60.0" layoutX="480.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjPila" fitHeight="76.0" fitWidth="60.0" layoutX="480.0" layoutY="216.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjPila.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgObjPokeball" fitHeight="38.0" fitWidth="38.0" layoutX="427.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgObjPokeball" fitHeight="38.0" fitWidth="38.0" layoutX="427.0" layoutY="234.0" onMouseClicked="#comprarObjeto" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgObjPokeball.png" />
                </image>
