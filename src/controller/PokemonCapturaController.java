@@ -9,9 +9,12 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -160,4 +163,40 @@ public class PokemonCapturaController {
 	        e.printStackTrace();
 	    }
 	}
-}
+	private void abrirTienda(Stage stage, Entrenador entrenador) {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
+	        Parent root = loader.load();
+
+	        TiendaController tiendaController = loader.getController();
+	        tiendaController.init(stage, entrenador, this);
+
+	        Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	public void capturarPkmn(MouseEvent  event) {
+	    if (pokeballs > 0 && pokemon != null) {
+	        pokeballs--;
+	        actualizarLblPokeballs();
+	        actualizarPokeballsBD();
+
+	        entrenador.agregarPokemonAlEquipo(pokemon);
+
+	        System.out.println("¡Pokémon capturado y agregado al entrenador: " + entrenador.getUsuario() + "!");
+	    } else {
+	    	int opcion = JOptionPane.showConfirmDialog(null, "NO TIENES POKEBALLS COMPRA ANDA");
+	    	if (opcion == JOptionPane.YES_OPTION) {
+	    	    abrirTienda(stage, entrenador);
+	    	}
+				
+
+			}
+	    }
+	}
+

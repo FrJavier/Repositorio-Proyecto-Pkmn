@@ -130,6 +130,11 @@ public class TiendaController {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
 	}
+
+	public void init(Stage currentStage, Entrenador entrenador2, PokemonCapturaController pokemonCapturaController) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	//falta enlazar los objetos en el fmxl <ImageView fx:id="imgObjAnillo" onMouseClicked="#comprarObjeto" />
 }

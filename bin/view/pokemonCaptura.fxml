@@ -74,7 +74,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgCaturar" fitHeight="107.0" fitWidth="200.0" layoutX="250.0" layoutY="321.0" onMouseClicked="#capturar" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgCaturar" fitHeight="107.0" fitWidth="200.0" layoutX="250.0" layoutY="321.0" onMouseClicked="#capturarPkmn" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/imgCapturar.gif" />
                </image>

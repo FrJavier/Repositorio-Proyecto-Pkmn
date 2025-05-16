@@ -133,9 +133,6 @@ public class Entrenador {
 				return;
 			}
 		}
-
-		Mochila nuevo = new Mochila(nombreObjeto, 1);
-		Mochila.add(nuevo);
 	}
 
 }
