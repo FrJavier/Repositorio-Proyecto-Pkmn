@@ -94,8 +94,11 @@ public class TiendaController {
 
 	}
 
+	int pokedollares;
 	private void cargarPokedollares() {
 		try (Connection conexion = DatabaseConnection.getConnection()) {
+			
+			pokedollares=this.entrenador.getDinero();
 			
 			actualizarLblPokedollares();
 
@@ -105,7 +108,7 @@ public class TiendaController {
 	}
 	
 	private void actualizarLblPokedollares () {
-		
+		lblPokeDollares.setText(String.valueOf(pokedollares));
 	}
 
 
