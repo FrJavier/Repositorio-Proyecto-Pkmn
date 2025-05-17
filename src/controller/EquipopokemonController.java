@@ -6,11 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Entrenador;
 import model.Pokemon;
+
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
@@ -205,8 +208,56 @@ public class EquipopokemonController {
         // Actualiza la interfaz si lo deseas
         // actualizarVistaEquipo(); // <-- Puedes implementar este método para recargar la vista
     }
-
     
+    //metodo para actualizar las vistas de los pokemon que hay en el equipo
+    public void actualizarVistaEquipo(Entrenador entrenador) {
+        LinkedList<Pokemon> equipo = entrenador.getEquipo();
+
+        ImageView[] imagenes = {
+            pokemonEquipoUno, pokemonEquipoDos, pokemonEquipoTres,
+            pokemonEquipoCuatro, pokemonEquipoCinco, pokemonEquipoSeis
+        };
+
+        Label[] hps = {
+            hpPkmUno, hpPkmDos, hpPkmTres,
+            hpPkmCuatro, hpPkmCinco, hpPkmSeis
+        };
+
+        ProgressBar[] barras = {
+            vitalidadPkmUno, vitalidadPkmDos, vitalidadPkmTres,
+            vitalidadPkmCuatro, vitalidadPkmCinco, vitalidadPkmSeis
+        };
+
+        for (int i = 0; i < 6; i++) {
+            if (i < equipo.size()) {
+                Pokemon pkm = equipo.get(i);
+
+                try {
+                    imagenes[i].setImage(new Image(getClass().getResourceAsStream(pkm.getRutaImagen())));
+                } catch (Exception e) {
+                    System.out.println("No se pudo cargar la imagen para: " + pkm.getRutaImagen());
+                    imagenes[i].setImage(null); // Por si la imagen no existe
+                }
+
+                imagenes[i].setVisible(true);
+
+                int hpActual = pkm.getHpActual();
+				int hpTotal = pkm.getHpTotal();
+                double porcentaje = (double) hpActual / hpTotal;
+
+                hps[i].setText("HP " + hpActual + "/" + hpTotal);
+                hps[i].setVisible(true);
+
+                barras[i].setProgress(porcentaje);
+                barras[i].setVisible(true);
+            } else {
+                //ocultar los elementos si no hay pokemon
+                imagenes[i].setVisible(false);
+                hps[i].setVisible(false);
+                barras[i].setVisible(false);
+            }
+        }
+    }
     
     
 

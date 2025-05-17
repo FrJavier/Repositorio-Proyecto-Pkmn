@@ -242,7 +242,7 @@ public class Pokemon {
 	}
 
 	public int getHpActual() {
-		return vitalidad;
+		return vitalidad; //devuelve el valor por defecto de cada pokemon
 	}
 
 	public int getHpTotal() {
