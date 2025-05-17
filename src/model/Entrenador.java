@@ -136,7 +136,7 @@ public class Entrenador {
 	    try (Connection conexion = DatabaseConnection.getConnection()) {
 	        String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
 	        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-	            stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
+	            stmt.setInt(1, this.id_entrenador); 
 	            stmt.setString(2, nombreObjeto);
 	        }
 	    } catch (SQLException e) {
