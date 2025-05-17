@@ -2,7 +2,8 @@ package controller;
 
 import javafx.scene.image.Image;
 import java.util.LinkedList;
-
+import java.util.List;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +12,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.ChoiceDialog;
+
 import model.Entrenador;
 import model.Pokemon;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.io.File;
+import javax.swing.JOptionPane;
+
+import database.DatabaseConnection;
+
 public class CentropokemonController {
+
+
+
 
     @FXML
     private Button btnCurarBoton;
@@ -25,111 +40,76 @@ public class CentropokemonController {
     private Button btnSalircpBoton;
 
     @FXML
-    private ImageView btnSiguientePkmCp;
-
-    @FXML
     private ImageView imgPkmCp;
 
     @FXML
-    private Label numVitalidadPkmCp;
-
-    @FXML
     private VBox vboxCentroPokemon;
-
-    @FXML
-    private ProgressBar vitalidadPkmCp;
     
-    //variables para los metodos de curar pokemons
+    // Variable para guardar el índice del pokemon actual
     private int pokemonActualIndex = 0;
     private final int vidaATope = 100;
-    //Init--------------------------------------------------------------------------
-    //variables necesarias para iniciar el init
+
+    // Variables para manejar la lógica
     private Menu menu;
     private Entrenador entrenador;
-	private Stage stage;
-	
-    //metodo
+    private Stage stage;
+
+    // Variable para guardar el Pokémon padre seleccionado (para crianza, supongo)
+    private Pokemon pokemonPadre;
+
+    // Método para inicializar
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;
-        this.entrenador = entrenador;  // guarda el entrenador
-        this.menu = menu;  // guarda el controlador del menu
-        
-        //comprobar si el entrenador tiene un equipo que curar
+        this.entrenador = entrenador;
+        this.menu = menu;
+
         if (entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
-        	System.out.println("El equipo del entrenador esta vacio");
-        	return;
+            System.out.println("El equipo del entrenador está vacío");
+            return;
         }
-        
-        actualizarVistaPokemon();
+            }
+
+ 
+
+
+
+
+    @FXML
+    private void abrirMenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+            Parent root = loader.load();
+
+            Menu menuController = loader.getController();
+            menuController.init(entrenador, stage, null);
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    private void actualizarVistaPokemon() {
-    	LinkedList<Pokemon> equipo = entrenador.getEquipo();
-    	if (equipo == null || equipo.isEmpty()) return;
-    	
-    	if (pokemonActualIndex >= equipo.size()) {
-    		pokemonActualIndex = 0;
-    	}
-    	
-    	Pokemon pkm = equipo.get(pokemonActualIndex);
-    	
-    	//cargar la imagen del pokemon correspondiente
-    	
-    	try {
-    		Image imagen = new Image(pkm.getIMG_Frontal());
-    		imgPkmCp.setImage(imagen);
-    	} catch (Exception e) {
-    		System.out.println("No se pudo cargar la imagen del pokemon");
-    	}
-    	
-    	//como no hay vida para cada pokemon vamos a poner que el valor de la vida para cada pokemon es 100
-    	int vidaActual = pkm.getVitalidad();
-    	double progreso = Math.min(1.0, (double) vidaActual/vidaATope);
-    	vitalidadPkmCp.setProgress(progreso);
-    	numVitalidadPkmCp.setText(vidaActual + " / " + vidaATope);
-    }
+
+
     
     @FXML
-    private void curarPokemon() {
-    	LinkedList<Pokemon> equipo = entrenador.getEquipo();
-    	if (equipo == null || equipo.isEmpty()) return;
-    	
-    	Pokemon pkm = equipo.get(pokemonActualIndex);
-    	pkm.setVitalidad(vidaATope);
-    	actualizarVistaPokemon();
+    private void curaPokemon(ActionEvent event) {
+        if (entrenador == null || entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "no hay pokemonspara curar");
+            return;
+        }
+
+        // Curar todos los Pokemon: poner vitalidad a 100
+        for (Pokemon pkm : entrenador.getEquipo()) {
+            pkm.setVitalidad(vidaATope);
+        }
+
+        JOptionPane.showMessageDialog(null, "¡Todos los Pokemon se han curado!");
+
     }
+
+
+
     
-     @FXML
-     private void siguientePokemon() {
-    	 LinkedList<Pokemon> equipo = entrenador.getEquipo();
-    	 if (equipo == null || equipo.size() <= 1) return; //para que no te deje darle a siguiente si tienes 0 pkm o si solo tienes 1
-    	 
-    	 pokemonActualIndex = (pokemonActualIndex + 1) % equipo.size();
-    	 actualizarVistaPokemon();
-     }
-    //------------------------------------------------------------------------------
-    
-    //Volver al menu----------------------------------------------------------------
-     @FXML
-     private void abrirMenu() {
-         try {
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
-             Parent root = loader.load();
-
-             // Obtener el controlador del menú cargado
-             Menu menuController = loader.getController();
-
-             // Inicializar el controlador con el entrenador y el stage actuales
-             menuController.init(entrenador, stage, null); 
-
-             // Cambiar la escena al menú
-             Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
-
-    //------------------------------------------------------------------------------
 }
