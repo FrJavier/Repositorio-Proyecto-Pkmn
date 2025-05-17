@@ -64,16 +64,17 @@ public class Menu {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Tienda.fxml"));
             Parent root = loader.load();
 
-            // carga el controlador de la tienda
             TiendaController tiendaController = loader.getController();
 
-            // cambia la escena actual del stage por la otra nueva
+            // Obtén el stage actual desde el evento, para que funcione en cualquier momento
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Inicializa el controlador tienda
             tiendaController.init(currentStage, entrenador, this);
 
-            // crea y enseña la nueva escena
+            // Cambia la escena
             Scene scene = new Scene(root);
-            currentStage.setScene(scene);  // esto es para cambiar en la misma ventana
+            currentStage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }

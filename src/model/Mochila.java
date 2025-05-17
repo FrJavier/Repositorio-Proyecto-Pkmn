@@ -12,7 +12,7 @@ public class Mochila {
     private String nombre;
     private int idEntrenador;
     private int cantidad;
-	private int idObjeto;
+    private int idObjeto;
 
     // Constructor
     public Mochila(int idEntrenador, int idObjeto, int cantidad) {
@@ -29,7 +29,7 @@ public class Mochila {
     public void setIdObjeto(int idObjeto) {
         this.idObjeto = idObjeto;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -46,13 +46,14 @@ public class Mochila {
         this.cantidad = cantidad;
     }
 
-    // para ver en consola mas facilmente
+    // para ver en consola mas fácilmente
     @Override
     public String toString() {
         return "Objeto: " + nombre + ", Cantidad: " + cantidad;
     }
-    
-    public static void agregarObjeto( String nombreObjeto) {
+
+    // Método corregido: ahora recibe el idEntrenador como parámetro
+    public static void agregarObjeto(int idEntrenador, String nombreObjeto) {
         try (Connection conexion = DatabaseConnection.getConnection()) {
 
             // Paso 1: Obtener el id del objeto por su nombre
@@ -78,12 +79,7 @@ public class Mochila {
                 """;
 
             try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-                try {
-					stmt.setInt(1, idEntrenador);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                stmt.setInt(1, idEntrenador);
                 stmt.setInt(2, idObjeto);
                 stmt.executeUpdate();
             }
@@ -92,5 +88,4 @@ public class Mochila {
             e.printStackTrace();
         }
     }
-    
 }

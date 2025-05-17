@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VistaCombateController">
    <children>
@@ -15,7 +15,8 @@
             <Image url="@../../img/d4rbxni-d2515ef4-2f32-499e-af87-92c2040af945.png" />
          </image>
       </ImageView>
-      <Pane fx:id="barracombate" layoutX="45.0" layoutY="325.0" prefHeight="74.0" prefWidth="506.0">
+      <ImageView fx:id="imgpkmuser" fitHeight="201.0" fitWidth="261.0" layoutX="22.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="barracombate" layoutX="45.0" layoutY="325.0" prefHeight="74.0" prefWidth="506.0" visible="false">
          <children>
             <ImageView fx:id="imgcontenedoracombate" fitHeight="91.0" fitWidth="564.0" layoutX="-28.0" layoutY="-8.0">
                <image>
@@ -26,20 +27,33 @@
             <Button fx:id="btnswap" layoutX="23.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Cambiar pokemon" />
             <Button fx:id="btnhuir" layoutX="253.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Huir" />
             <Button fx:id="btnobjeto" layoutX="253.0" layoutY="7.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Objeto" />
+            <Pane fx:id="barracombate1" layoutX="-6.0" layoutY="-4.0" prefHeight="74.0" prefWidth="506.0" visible="false">
+               <children>
+                  <ImageView fx:id="imgcontenedoracombate1" fitHeight="91.0" fitWidth="564.0" layoutX="-29.0" layoutY="-9.0">
+                     <image>
+                        <Image url="@../../img/imgCuadro.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnmv1" layoutX="23.0" layoutY="7.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="mv1" />
+                  <Button fx:id="btnmv2" layoutX="23.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="mv2" />
+                  <Button fx:id="btnmv3" layoutX="253.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="mv3" />
+                  <Button fx:id="btnmv4" layoutX="253.0" layoutY="7.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="mv4" />
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Pane layoutX="284.0" layoutY="249.0" prefHeight="58.0" prefWidth="301.0">
+      <Pane fx:id="panepkm" layoutX="284.0" layoutY="249.0" prefHeight="66.0" prefWidth="306.0" visible="false">
          <children>
-            <ImageView fx:id="imginfpkcombate" fitHeight="189.0" fitWidth="391.0" layoutX="-36.0" layoutY="-65.0" rotate="-2.1">
+            <ImageView fx:id="imginfpkcombate" fitHeight="144.0" fitWidth="400.0" layoutX="-36.0" layoutY="-65.0" rotate="-2.1">
                <image>
                   <Image url="@../../img/vida%20tabla.png" />
                </image>
             </ImageView>
-            <TextFlow fx:id="txtnombrepk" layoutX="17.0" layoutY="6.0" prefHeight="15.0" prefWidth="277.0" rotate="-4.1" />
-            <ProgressBar fx:id="progressbarcombate" layoutX="24.0" layoutY="24.0" prefHeight="11.0" prefWidth="254.0" progress="0.0" rotate="-4.1" />
-            <TextFlow fx:id="txtfieldnivelpokemonrival" layoutX="13.0" layoutY="37.0" prefHeight="15.0" prefWidth="277.0" rotate="-4.1" />
+            <Label fx:id="txtnombrepk" layoutX="22.0" layoutY="-18.0" prefHeight="0.0" prefWidth="277.0" rotate="-4.1" />
+            <ProgressBar fx:id="progressbarcombate" layoutX="33.0" prefHeight="11.0" prefWidth="254.0" progress="0.0" rotate="-4.1" />
+            <Label fx:id="txtnvlpkm" layoutX="26.0" layoutY="10.0" prefHeight="0.0" prefWidth="277.0" rotate="-4.1" />
          </children></Pane>
-      <Pane layoutX="22.0" layoutY="71.0" prefHeight="58.0" prefWidth="293.0">
+      <Pane fx:id="panerival" layoutX="22.0" layoutY="71.0" prefHeight="58.0" prefWidth="293.0" visible="false">
          <children>
             <ImageView fx:id="imginfpkcombateenemigo" fitHeight="191.0" fitWidth="362.0" layoutX="-24.0" layoutY="-66.0" rotate="6.800000000000001">
                <image>
@@ -47,8 +61,10 @@
                </image>
             </ImageView>
             <ProgressBar fx:id="progressbarenemigo" layoutX="30.0" layoutY="24.0" prefHeight="11.0" prefWidth="254.0" progress="0.0" rotate="8.8" />
-            <TextFlow fx:id="txtnombrepkenemigo" layoutX="30.0" layoutY="6.0" prefHeight="12.0" prefWidth="262.0" rotate="8.8" />
-            <TextFlow fx:id="textfieldnivelpokemoncombate" layoutX="30.0" layoutY="38.0" prefHeight="12.0" prefWidth="262.0" rotate="8.8" />
+            <Label fx:id="txtnombrepkenemigo" layoutX="33.0" layoutY="5.0" prefHeight="17.0" prefWidth="261.0" rotate="8.8" />
+            <Label fx:id="txtdtlpkenemigo" layoutX="26.0" layoutY="36.0" prefHeight="17.0" prefWidth="261.0" rotate="8.8" />
          </children></Pane>
+      <ImageView fx:id="imgpkmnrival" fitHeight="150.0" fitWidth="200.0" layoutX="335.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnEmpezar" layoutX="208.0" layoutY="200.0" mnemonicParsing="false" onAction="#Comenzarcombate" prefHeight="26.0" prefWidth="186.0" text="empezar" />
    </children>
 </AnchorPane>

@@ -13,7 +13,7 @@ public class MVataque extends movimiento {
 	        this.tipo = tipo;
 	    }
 
-	    public int getPoder() {
+	    public  int getPoder() {
 	        return poder;
 	    }
 
