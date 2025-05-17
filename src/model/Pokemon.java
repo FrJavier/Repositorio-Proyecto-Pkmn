@@ -225,6 +225,40 @@ public class Pokemon {
 	public Pokemon() {
 		// TODO Auto-generated constructor stub
 	}
+	public Pokemon(int num_pokedex, String note, int vitalidad, int ataque, int defensa, int atk_especial,
+			int def_especial, int velocidad, int nivel, String estado, int equipo, String iMG_Trasera) {
+		super();
+		this.num_pokedex = num_pokedex;
+		this.note = note;
+		this.vitalidad = vitalidad;
+		this.ataque = ataque;
+		this.defensa = defensa;
+		this.atk_especial = atk_especial;
+		this.def_especial = def_especial;
+		this.velocidad = velocidad;
+		this.nivel = nivel;
+		this.estado = estado;
+		this.equipo = equipo;
+		IMG_Trasera = iMG_Trasera;
+	}
+	 public Pokemon(int id_pokemon, String nombre, int nivel, int vitalidad, 
+             int id_entrenador, int velocidad, int atk_especial, String img_trasera,
+             int ataque, int defensa, int def_especial, String estado) {
+		 	this.id_pokemon = id_pokemon;
+		 	this.nombre = nombre;
+		 	this.nivel = nivel;
+		 	this.vitalidad = vitalidad;
+		 	this.id_entrenador = id_entrenador;
+		 	this.velocidad = velocidad;
+  			this.atk_especial = atk_especial;
+  			this.IMG_Trasera = img_trasera;
+  			this.ataque = ataque;
+  			this.defensa = defensa;
+  			this.def_especial = def_especial;
+  			this.estado = estado;
+}
+	
+	
 	
 	
 }
