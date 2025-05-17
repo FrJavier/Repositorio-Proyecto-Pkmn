@@ -5,8 +5,15 @@ public abstract class movimiento {
 	private int id_movimiento;
 	private String nom_movimiento;
 	private int turnos;
+	private int Pp;
 	
 	
+	public int getPp() {
+		return Pp;
+	}
+	public void setPp(int pp) {
+		Pp = pp;
+	}
 	public int getId_movimiento() {
 		return id_movimiento;
 	}
