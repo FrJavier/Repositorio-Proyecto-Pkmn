@@ -16,5 +16,25 @@
             <Image url="@../../img/imgSalir.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="imgPotaxio" fitHeight="150.0" fitWidth="200.0" layoutX="253.0" layoutY="69.0" onMouseClicked="#queTocas" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/imgPotaxioAlante.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="202.0" layoutY="165.0" onMouseClicked="#amor" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/imgAmor.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgPokemon1" fitHeight="150.0" fitWidth="200.0" layoutX="46.0" layoutY="144.0" onMouseClicked="#añadirPokemon1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/imgMas.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgPokemon2" fitHeight="150.0" fitWidth="200.0" layoutX="403.0" layoutY="144.0" onMouseClicked="#añadirPokemon2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/imgMas.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

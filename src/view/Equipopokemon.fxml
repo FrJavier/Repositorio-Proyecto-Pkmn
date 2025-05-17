@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EquipopokemonController"
->
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EquipopokemonController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -29,7 +28,7 @@
                   <Image url="@../../img/Volver-6-5-2025%20(2).gif" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="256.0" layoutX="182.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgEligeUnPokemon" fitHeight="150.0" fitWidth="256.0" layoutX="182.0" layoutY="345.0" onMouseClicked="#elegirPokemon" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/Elige-un-Pok-mon-6-5-2025.gif" />
                </image>
