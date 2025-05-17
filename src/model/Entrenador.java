@@ -131,7 +131,7 @@ public class Entrenador {
 	}
 
 	public void agregarObjeto(String nombreObjeto) {
-		mochila.agregarObjeto(nombreObjeto);
+		mochila.agregarObjeto(id_entrenador, nombreObjeto);
 	    
 	    try (Connection conexion = DatabaseConnection.getConnection()) {
 	        String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
