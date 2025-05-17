@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -12,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -124,86 +127,101 @@ public class VistaCrianzaController {
 	}
 
 
-    @FXML
-    void añadirPokemon1(MouseEvent event) {
-        if (entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No tienes Pokémon en tu equipo.");
-            return;
-        }
+	@FXML
+	void añadirPokemon1(MouseEvent event) {
+	    if (entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "No tienes Pokémon en tu equipo.");
+	        return;
+	    }
 
-        // Obtener los nombres de los Pokémon del equipo
-        List<String> nombresPokemon = entrenador.getEquipo().stream()
-                .map(pokemon -> pokemon.getNombre())
-                .toList();
+	    List<String> nombresPokemon = entrenador.getEquipo().stream()
+	            .map(Pokemon::getNombre)
+	            .toList();
 
-        // Mostrar un ChoiceDialog para que el usuario elija uno
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(nombresPokemon.get(0), nombresPokemon);
-        dialog.setTitle("Seleccionar Pokémon");
-        dialog.setHeaderText("Elige un Pokémon del equipo");
-        dialog.setContentText("Pokémon:");
+	    ChoiceDialog<String> dialog = new ChoiceDialog<>(nombresPokemon.get(0), nombresPokemon);
+	    dialog.setTitle("Seleccionar Pokémon");
+	    dialog.setHeaderText("Elige un Pokémon del equipo");
+	    dialog.setContentText("Pokémon:");
 
-        dialog.showAndWait().ifPresent(nombreSeleccionado -> {
-            // Buscar el Pokémon completo con ese nombre
-            Pokemon seleccionado = entrenador.getEquipo().stream()
-                    .filter(p -> p.getNombre().equals(nombreSeleccionado))
-                    .findFirst()
-                    .orElse(null);
+	    dialog.showAndWait().ifPresent(nombreSeleccionado -> {
+	        Pokemon seleccionado = entrenador.getEquipo().stream()
+	                .filter(p -> p.getNombre().equals(nombreSeleccionado))
+	                .findFirst()
+	                .orElse(null);
 
-            if (seleccionado != null) {
-                // Mostrar imagen frontal
-                try {
-                    imgPokemon1.setImage(new javafx.scene.image.Image(seleccionado.getIMG_Frontal()));
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se pudo cargar la imagen del Pokémon.");
-                    e.printStackTrace();
-                }
+	        if (seleccionado != null) {
+	            this.pokemonPadre = seleccionado;
 
-                // Guardar si lo necesitas para crianza
-                this.pokemonPadre = seleccionado; // <- crea esta variable si aún no la tienes
-            }
-        });
-    }
+	            try (Connection connection = DatabaseConnection.getConnection()) {
+	                String sql = "SELECT Img_Frontal FROM pokedex WHERE num_pokedex = ?";
+	                PreparedStatement stmt = connection.prepareStatement(sql);
+	                stmt.setInt(1, seleccionado.getNum_pokedex());
+	                ResultSet rs = stmt.executeQuery();
+
+	                if (rs.next()) {
+	                    String rutaImagen = rs.getString("Img_Frontal");
+	                    File archivo = new File(rutaImagen);
+	                    Image imagen = new Image(archivo.toURI().toString());
+	                    imgPokemon1.setImage(imagen);
+	                }
+	            } catch (Exception e) {
+	                JOptionPane.showMessageDialog(null, "Error al obtener la imagen del Pokémon.");
+	                e.printStackTrace();
+	            }
+	        }
+	    });
+	}
 
 
-    @FXML
-    void añadirPokemon2(MouseEvent event) {
-        if (entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No tienes Pokémon en tu equipo.");
-            return;
-        }
 
-        // Obtener los nombres de los Pokémon del equipo
-        List<String> nombresPokemon = entrenador.getEquipo().stream()
-                .map(pokemon -> pokemon.getNombre())
-                .toList();
 
-        // Mostrar un ChoiceDialog para que el usuario elija uno
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(nombresPokemon.get(0), nombresPokemon);
-        dialog.setTitle("Seleccionar Pokémon");
-        dialog.setHeaderText("Elige un segundo Pokémon del equipo");
-        dialog.setContentText("Pokémon:");
 
-        dialog.showAndWait().ifPresent(nombreSeleccionado -> {
-            // Buscar el Pokémon completo con ese nombre
-            Pokemon seleccionado = entrenador.getEquipo().stream()
-                    .filter(p -> p.getNombre().equals(nombreSeleccionado))
-                    .findFirst()
-                    .orElse(null);
 
-            if (seleccionado != null) {
-                // Mostrar imagen frontal
-                try {
-                    imgPokemon2.setImage(new javafx.scene.image.Image(seleccionado.getIMG_Frontal()));
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se pudo cargar la imagen del Pokémon.");
-                    e.printStackTrace();
-                }
+	@FXML
+	void añadirPokemon2(MouseEvent event) {
+	    if (entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "No tienes Pokémon en tu equipo.");
+	        return;
+	    }
 
-                // Guardar para futura crianza
-                this.pokemonMadre = seleccionado; // <- crea esta variable si aún no la tienes
-            }
-        });
-    }
+	    List<String> nombresPokemon = entrenador.getEquipo().stream()
+	            .map(Pokemon::getNombre)
+	            .toList();
+
+	    ChoiceDialog<String> dialog = new ChoiceDialog<>(nombresPokemon.get(0), nombresPokemon);
+	    dialog.setTitle("Seleccionar Pokémon");
+	    dialog.setHeaderText("Elige un Pokémon del equipo");
+	    dialog.setContentText("Pokémon:");
+
+	    dialog.showAndWait().ifPresent(nombreSeleccionado -> {
+	        Pokemon seleccionado = entrenador.getEquipo().stream()
+	                .filter(p -> p.getNombre().equals(nombreSeleccionado))
+	                .findFirst()
+	                .orElse(null);
+
+	        if (seleccionado != null) {
+	            this.pokemonMadre = seleccionado;
+
+	            try (Connection connection = DatabaseConnection.getConnection()) {
+	                String sql = "SELECT Img_Frontal FROM pokedex WHERE num_pokedex = ?";
+	                PreparedStatement stmt = connection.prepareStatement(sql);
+	                stmt.setInt(1, seleccionado.getNum_pokedex());
+	                ResultSet rs = stmt.executeQuery();
+
+	                if (rs.next()) {
+	                    String rutaImagen = rs.getString("Img_Frontal");
+	                    File archivo = new File(rutaImagen);
+	                    Image imagen = new Image(archivo.toURI().toString());
+	                    imgPokemon2.setImage(imagen);
+	                }
+	            } catch (Exception e) {
+	                JOptionPane.showMessageDialog(null, "Error al obtener la imagen del Pokémon.");
+	                e.printStackTrace();
+	            }
+	        }
+	    });
+	}
+
 
 
     @FXML
