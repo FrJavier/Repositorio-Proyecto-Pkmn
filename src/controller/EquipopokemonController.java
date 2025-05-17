@@ -10,6 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Entrenador;
+import model.Pokemon;
+
+import javax.swing.JOptionPane;
+
 import controller.Menu;
 
 public class EquipopokemonController {
@@ -34,6 +38,9 @@ public class EquipopokemonController {
 
     @FXML
     private Label hpPkmUno;
+
+    @FXML
+    private ImageView imgEligeUnPokemon;
 
     @FXML
     private ImageView pokemonEquipoCinco;
@@ -73,6 +80,9 @@ public class EquipopokemonController {
 
     @FXML
     private ImageView volverCombate;
+    
+    
+    
 	private Entrenador entrenador;
     
   //metodo
@@ -100,6 +110,98 @@ public class EquipopokemonController {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    void elegirPokemon(MouseEvent event) {
+        // Mostrar los Pokémon que están en la caja (equipo == 0)
+        java.util.List<Pokemon> caja = entrenador.getPokemonCaja();
+
+        if (caja.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tienes Pokémon en la caja.");
+            return;
+        }
+
+        // Crear un array de opciones con los nombres/motes
+        String[] opcionesCaja = caja.stream()
+            .map(p -> p.getNote() + " (Lv." + p.getNivel() + ")")
+            .toArray(String[]::new);
+
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "Elige un Pokémon de la caja para añadir al equipo:",
+                "Caja Pokémon",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opcionesCaja,
+                opcionesCaja[0]);
+
+        if (seleccion == null) return; // Usuario canceló
+
+        // Buscar el Pokémon seleccionado
+        Pokemon elegido = null;
+        for (Pokemon p : caja) {
+            if (seleccion.contains(p.getNote())) {
+                elegido = p;
+                break;
+            }
+        }
+
+        if (elegido == null) return;
+
+        // Comprobar si el equipo está lleno
+        if (entrenador.getEquipo().size() >= 6) {
+            int respuesta = JOptionPane.showConfirmDialog(null,
+                    "Tu equipo está lleno. ¿Quieres sacar un Pokémon para meter a " + elegido.getNote() + "?",
+                    "Equipo lleno",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                // Mostrar Pokémon del equipo actual
+                String[] opcionesEquipo = entrenador.getEquipo().stream()
+                        .map(p -> p.getNote() + " (Lv." + p.getNivel() + ")")
+                        .toArray(String[]::new);
+
+                String pokeASacar = (String) JOptionPane.showInputDialog(
+                        null,
+                        "¿Qué Pokémon quieres sacar del equipo?",
+                        "Sacar Pokémon",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        opcionesEquipo,
+                        opcionesEquipo[0]);
+
+                if (pokeASacar == null) return;
+
+                Pokemon aSacar = null;
+                for (Pokemon p : entrenador.getEquipo()) {
+                    if (pokeASacar.contains(p.getNote())) {
+                        aSacar = p;
+                        break;
+                    }
+                }
+
+                if (aSacar != null) {
+                    // Intercambiar
+                    entrenador.sacarDelEquipo(aSacar); // pone equipo = 0
+                    entrenador.meterAlEquipo(elegido); // pone equipo = 1
+
+                    JOptionPane.showMessageDialog(null, elegido.getNote() + " ha sido añadido al equipo.\n" + aSacar.getNote() + " ha sido enviado a la caja.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha hecho ningún cambio.");
+            }
+
+        } else {
+            // Añadir directamente al equipo
+            entrenador.meterAlEquipo(elegido);
+            JOptionPane.showMessageDialog(null, elegido.getNote() + " ha sido añadido al equipo.");
+        }
+
+        // Actualiza la interfaz si lo deseas
+        // actualizarVistaEquipo(); // <-- Puedes implementar este método para recargar la vista
+    }
+
     
     
     
