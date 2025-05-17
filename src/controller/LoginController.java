@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 
 public class LoginController {
 
@@ -52,11 +53,36 @@ public class LoginController {
     }
 
     @FXML
+    public void initialize() {
+        mostrarImagenPorHora();
+    }
+
+    private void mostrarImagenPorHora() {
+        // Ocultar todas las imagenes primero
+        imgLoginDia.setVisible(false);
+        imgLoginMañana.setVisible(false);
+        imgLoginTarde.setVisible(false);
+        imgLoginNoche.setVisible(false);
+
+        // coje la hora actual
+        LocalTime ahora = LocalTime.now();
+
+        if (ahora.isAfter(LocalTime.of(6, 0)) && ahora.isBefore(LocalTime.of(12, 0))) {
+            imgLoginMañana.setVisible(true); // 6:00 - 11:59
+        } else if (ahora.isAfter(LocalTime.of(12, 0)) && ahora.isBefore(LocalTime.of(18, 0))) {
+            imgLoginTarde.setVisible(true); // 12:00 - 17:59
+        } else if (ahora.isAfter(LocalTime.of(18, 0)) && ahora.isBefore(LocalTime.of(21, 0))) {
+            imgLoginDia.setVisible(true); // 18:00 - 20:59 (atardecer)
+        } else {
+            imgLoginNoche.setVisible(true); // 21:00 - 5:59
+        }
+    }
+
+    @FXML
     void cerrar(ActionEvent event) {
         if (stage != null) {
             stage.close();
         } else {
-            // Fallback
             Stage s = (Stage) btnSalir.getScene().getWindow();
             s.close();
         }
@@ -64,8 +90,7 @@ public class LoginController {
 
     @FXML
     public void loguearse(MouseEvent event) {
-
-        txtError.setVisible(false); // Ocultar error al iniciar
+        txtError.setVisible(false);
 
         String usuario = txtFieldUsuarioLogin.getText().trim();
         String pass = passwordFieldUsuarioLogin.getText();
@@ -81,7 +106,6 @@ public class LoginController {
             return;
         }
 
-        // Consulta SQL
         String sql = "SELECT pass FROM entrenador WHERE usuario = ?";
 
         DatabaseConnection con = new DatabaseConnection();
@@ -95,16 +119,12 @@ public class LoginController {
                 Entrenador entrenador = new Entrenador(usuario, pass);
 
                 if (!rs.isBeforeFirst()) {
-                    // Usuario no registrado
                     int opcion = JOptionPane.showConfirmDialog(null, "Usuario no registrado, ¿desea registrarlo?");
                     if (opcion == JOptionPane.YES_OPTION) {
                         EntrenadorDatabase.crearEntrenador(conexion, entrenador);
                         EntrenadorDatabase.obtenerIDPokedolaresEntre(conexion, entrenador);
                         entrenador.setPokedollares(20000);
-
-                        // Dar objetos iniciales a la mochila
                         MochilaDatabase.agregarObjeto(entrenador.getId_entrenador(), 8, 10);
-
                         abrirMenuPrincipal(entrenador);
                     } else {
                         passwordFieldUsuarioLogin.clear();
@@ -154,5 +174,4 @@ public class LoginController {
             txtError.setVisible(true);
         }
     }
-
 }
