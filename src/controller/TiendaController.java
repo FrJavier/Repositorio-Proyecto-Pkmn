@@ -112,32 +112,32 @@ public class TiendaController {
 
     @FXML
     private void comprarBaston(MouseEvent event) {
-        realizarCompra("BASTON", 15000);
+        realizarCompra("BASTON", 10000);
     }
 
     @FXML
     private void comprarChaleco(MouseEvent event) {
-        realizarCompra("CHALECO", 15000);
+        realizarCompra("CHALECO", 10000);
     }
 
     @FXML
     private void comprarEter(MouseEvent event) {
-        realizarCompra("ETER", 15000);
+        realizarCompra("ETER", 500);
     }
 
     @FXML
     private void comprarPesa(MouseEvent event) {
-        realizarCompra("PESA", 15000);
+        realizarCompra("PESA", 10000);
     }
 
     @FXML
     private void comprarPilas(MouseEvent event) {
-        realizarCompra("PILAS", 15000);
+        realizarCompra("PILAS", 10000);
     }
 
     @FXML
     private void comprarPokeball(MouseEvent event) {
-        realizarCompra("POKEBALL", 15000);
+        realizarCompra("POKEBALL", 50);
     }
 
     private void realizarCompra(String objeto, int precio) {
