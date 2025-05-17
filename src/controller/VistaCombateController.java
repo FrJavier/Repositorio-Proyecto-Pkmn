@@ -357,6 +357,12 @@ public class VistaCombateController {
 		}
 	}
 	
+	
+	@FXML
+	private void sacarpokemon() {
+		
+	}
+	
 	@FXML
 	private void Comenzarcombate(ActionEvent event) {
 		
