@@ -1,16 +1,15 @@
+// TiendaController.java
 package controller;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 
 import database.DatabaseConnection;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -18,146 +17,130 @@ import model.Entrenador;
 
 public class TiendaController {
 
-	@FXML
-	private ImageView imgEstanteria;
+    @FXML
+    private ImageView imgEstanteria;
 
-	@FXML
-	private ImageView imgObjAnillo;
+    @FXML
+    private ImageView imgObjAnillo;
 
-	@FXML
-	private ImageView imgObjBaston;
+    @FXML
+    private ImageView imgObjBaston;
 
-	@FXML
-	private ImageView imgObjChaleco;
+    @FXML
+    private ImageView imgObjChaleco;
 
-	@FXML
-	private ImageView imgObjEter;
+    @FXML
+    private ImageView imgObjEter;
 
-	@FXML
-	private ImageView imgObjPesa;
+    @FXML
+    private ImageView imgObjPesa;
 
-	@FXML
-	private ImageView imgObjPila;
+    @FXML
+    private ImageView imgObjPila;
 
-	@FXML
-	private ImageView imgObjPokeball;
+    @FXML
+    private ImageView imgObjPokeball;
 
-	@FXML
-	private ImageView imgSalir;
-	
+    @FXML
+    private ImageView imgSalir;
+
+    @FXML
+    private ImageView imgTienda;
+
     @FXML
     private Label lblPokeDollares;
 
-	@FXML
-	private ImageView imgTienda;
-	// variables
-	private Stage stage;
+    private Stage stage;
+    private Menu menu;
+    private Entrenador entrenador;
+    private int pokedollares;
 
-	// Init--------------------------------------------------------------------------
-	// variables necesarias para iniciar el init
-	private Menu menu;
-	private Entrenador entrenador;
+    public void init(Stage stage, Entrenador entrenador, Menu menu) {
+        this.stage = stage;
+        this.entrenador = entrenador;
+        this.menu = menu;
+        cargarPokedollares();
+    }
 
-	// ------------------------------------------------------------------------------
-	// Volver al
-	// menu----------------------------------------------------------------
-	@FXML
-	private void abrirMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
-			Parent root = loader.load();
+    private void cargarPokedollares() {
+        try (Connection conexion = DatabaseConnection.getConnection()) {
+            pokedollares = entrenador.getDinero();
+            actualizarLblPokedollares();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			loader.setController(menu);
+    private void actualizarLblPokedollares() {
+        lblPokeDollares.setText(String.valueOf(pokedollares));
+    }
 
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
+    @FXML
+    private void abrirMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+            Parent root = loader.load();
+            loader.setController(menu);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 
-	// ------------------------------------------------------------------------------
-	
-	// variables para mapear objetos con precios
-	private Map<ImageView, String> objetoPorImagen = new HashMap<>();
-	private Map<String, Integer> precios = new HashMap<>();
+    @FXML
+    private void comprarAnilloUnico(MouseEvent event) {
+        realizarCompra("ANILLO_UNICO", 15000);
+    }
 
-	// inicializarmos objetos y precios
-	public void init(Stage stage, Entrenador entrenador, Menu menu) {
-		this.stage = stage;
-		this.entrenador = entrenador;
-		this.menu = menu;
-		inicializarObjetos(); // Llamamos a este método que viene abajo
-		cargarPokedollares();
+    @FXML
+    private void comprarBaston(MouseEvent event) {
+        realizarCompra("BASTON", 15000);
+    }
 
-	}
+    @FXML
+    private void comprarChaleco(MouseEvent event) {
+        realizarCompra("CHALECO", 15000);
+    }
 
-	int pokedollares;
-	private void cargarPokedollares() {
-		try (Connection conexion = DatabaseConnection.getConnection()) {
-			
-			pokedollares=this.entrenador.getDinero();
-			
-			actualizarLblPokedollares();
+    @FXML
+    private void comprarEter(MouseEvent event) {
+        realizarCompra("ETER", 15000);
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void actualizarLblPokedollares () {
-		lblPokeDollares.setText(String.valueOf(pokedollares));
-	}
+    @FXML
+    private void comprarPesa(MouseEvent event) {
+        realizarCompra("PESA", 15000);
+    }
 
+    @FXML
+    private void comprarPilas(MouseEvent event) {
+        realizarCompra("PILAS", 15000);
+    }
 
-	private void inicializarObjetos() {
-		objetoPorImagen.put(imgObjAnillo, "Anillo");
-		objetoPorImagen.put(imgObjBaston, "Baston");
-		objetoPorImagen.put(imgObjChaleco, "Chaleco");
-		objetoPorImagen.put(imgObjEter, "Eter");
-		objetoPorImagen.put(imgObjPesa, "Pesa");
-		objetoPorImagen.put(imgObjPila, "Pila");
-		objetoPorImagen.put(imgObjPokeball, "Pokeball");
+    @FXML
+    private void comprarPokeball(MouseEvent event) {
+        realizarCompra("POKEBALL", 15000);
+    }
 
-		precios.put("Anillo", 100);
-		precios.put("Baston", 150);
-		precios.put("Chaleco", 120);
-		precios.put("Eter", 80);
-		precios.put("Pesa", 90);
-		precios.put("Pila", 70);
-		precios.put("Pokeball", 50);
-	}
-
-	// metodo para comprar objetos
-	@FXML
-	private void comprarObjeto(MouseEvent event) {
-		ImageView clicado = (ImageView) event.getSource();
-
-		if (objetoPorImagen.containsKey(clicado)) {
-			String nombreObjeto = objetoPorImagen.get(clicado);
-			int precio = precios.get(nombreObjeto);
-
-			if (entrenador.getPokedollares() >= precio) {
-				entrenador.setPokedollares(entrenador.getPokedollares()- precio);
-				entrenador.agregarObjeto(nombreObjeto);
-				mostrarAlerta("Compra exitosa", "Has comprado un " + nombreObjeto + " por " + precio + " pokedólares.");
-			} else {
-				mostrarAlerta("Fondos insuficientes", "No tienes suficiente dinero para comprar " + nombreObjeto + ".");
-			}
-		}
-	}
-	
-	//metodo para mostrar aletar despues de comprar
-	private void mostrarAlerta(String titulo, String mensaje) {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle(titulo);
-		alert.setHeaderText(null);
-		alert.setContentText(mensaje);
-		alert.showAndWait();
-	}
-
-	
-	//falta enlazar los objetos en el fmxl <ImageView fx:id="imgObjAnillo" onMouseClicked="#comprarObjeto" />
+    private void realizarCompra(String objeto, int precio) {
+        if (entrenador.getPokedollares() >= precio) {
+            entrenador.setPokedollares(entrenador.getPokedollares() - precio);
+            entrenador.agregarObjeto(objeto);
+            mostrarAlerta("Compra exitosa", "Has comprado 1 " + objeto + ".");
+            pokedollares = entrenador.getPokedollares();
+            actualizarLblPokedollares();
+        } else {
+            mostrarAlerta("Fondos insuficientes", "No tienes suficiente dinero para comprar " + objeto + ".");
+        }
+    }
 }
