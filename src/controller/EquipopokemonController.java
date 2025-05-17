@@ -95,17 +95,21 @@ public class EquipopokemonController {
     //------------------------------------------------------------------------------
     //Volver al menu----------------------------------------------------------------
     @FXML
-    private void abrirMenu(MouseEvent event) {
+    private void abrirMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
             Parent root = loader.load();
 
-            loader.setController(this);
+            // Obtener el controlador del menú cargado
+            Menu menuController = loader.getController();
 
+            // Inicializar el controlador con el entrenador y el stage actuales
+            menuController.init(entrenador, stage, null); 
+
+            // Cambiar la escena al menú
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
