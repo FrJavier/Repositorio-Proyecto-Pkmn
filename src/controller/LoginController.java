@@ -28,9 +28,7 @@ import java.time.LocalTime;
 public class LoginController {
 
     @FXML private Button btnEntrar;
-    @FXML private Button btnSalir;
-    @FXML private Button btnRegistrar;
-
+    @FXML private ImageView imgSalir;
     @FXML private ImageView imgEntrar;
     @FXML private ImageView imgLoginDia;
     @FXML private ImageView imgLoginMañana;
@@ -78,12 +76,14 @@ public class LoginController {
         }
     }
 
+
+    
     @FXML
-    void cerrar(ActionEvent event) {
+    void cerrar(MouseEvent event) {
         if (stage != null) {
             stage.close();
         } else {
-            Stage s = (Stage) btnSalir.getScene().getWindow();
+            Stage s = (Stage) imgSalir.getScene().getWindow();
             s.close();
         }
     }
