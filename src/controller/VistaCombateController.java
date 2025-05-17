@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -19,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import model.Entrenador;
 import model.MVataque;
 import model.Objeto;
@@ -110,7 +114,6 @@ public class VistaCombateController {
 
 	Entrenador entrenador;
 	Turno turno;
-	movimiento mov = turno.getMovimiento();
 	Pokemon atacante;
 	Pokemon defensor;
 	private Pokemon pokemonJugador;
@@ -119,6 +122,17 @@ public class VistaCombateController {
 	int pkDerrotadosRival;
 	private Random random = new Random();
 	MVataque m = new MVataque();
+	private Stage stage ;
+	movimiento mov;
+	
+	
+	
+	public void init(Stage stage, Entrenador entrenador, Turno turno) {
+		this.stage = stage;
+		this.entrenador = entrenador;
+		this.turno = turno;
+		this.mov = turno.getMovimiento(); 
+	}
 
 	public String ejecutarAtaque(Pokemon atacante, Pokemon defensor, movimiento movimiento) {
 		if (movimiento.getPp() <= 0) {
@@ -283,10 +297,7 @@ public class VistaCombateController {
 	}
 
 
-	private void cambiar() {
-		int nuevoIndex = turno.getNuevoPokemonIndex();
-		return cambiarPokemonJugador(nuevoIndex);
-	}
+	
 
 	private void huir(ActionEvent event) {
 		Random azar = new Random();
@@ -306,8 +317,9 @@ public class VistaCombateController {
 		Random azar = new Random();
 		int pokemonid = azar.nextInt(151) + 1;
 
-		String sql = "SELECT pkdx.IMG_Frontal,p.nombre,p.vitalidad,p.ataque,p.defensa,p.atk_especial,p.def_especial,p.velocidad,"
-				+ "p.nivel FROM pokedex pkdx inner join pokemon p ON pksx.num_pokedex=p.num_pokedex WHERE pkdx.num_pokedex = " + pokemonid;
+		String sql = "SELECT pkdx.IMG_Frontal, p.nombre, p.vitalidad, p.ataque, p.defensa, p.atk_especial, p.def_especial, p.velocidad, "
+		           + "p.nivel FROM pokedex pkdx INNER JOIN pokemon p ON pkdx.num_pokedex = p.num_pokedex WHERE pkdx.num_pokedex = " + pokemonid;
+
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", "");
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -333,6 +345,8 @@ public class VistaCombateController {
 				txtnombrepkenemigo.setVisible(true);
 				imgpkmnrival.setImage(image);
 				txtnombrepkenemigo.setText(nombre);
+				txtdtlpkenemigo.setText("NIVEL :"+String.valueOf(rival.getNivel()));
+
 
 			} else {
 				System.out.println("No se encontró un Pokémon con ID: " + pokemonid);
@@ -343,15 +357,37 @@ public class VistaCombateController {
 		}
 	}
 	
+	@FXML
 	private void Comenzarcombate(ActionEvent event) {
 		
 		panepkm.setVisible(true);
 		panerival.setVisible(true);
 		imgpkmuser.setVisible(true);
 		barracombate.setVisible(true);
+		btnEmpezar.setVisible(false);
 		generarPokemon();
 	}
 	
+	
+	@FXML
+	private void abrirMenu() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+
+			Parent root = loader.load();
+
+			Menu controller = loader.getController();
+			
+			controller.init(stage, entrenador);
+
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 
