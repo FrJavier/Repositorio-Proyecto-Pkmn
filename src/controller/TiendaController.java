@@ -1,8 +1,12 @@
 package controller;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+
+import database.DatabaseConnection;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,6 +44,9 @@ public class TiendaController {
 
 	@FXML
 	private ImageView imgSalir;
+	
+    @FXML
+    private Label lblPokeDollares;
 
 	@FXML
 	private ImageView imgTienda;
@@ -83,7 +90,27 @@ public class TiendaController {
 		this.entrenador = entrenador;
 		this.menu = menu;
 		inicializarObjetos(); // Llamamos a este método que viene abajo
+		cargarPokedollares();
+
 	}
+
+	int pokedollares;
+	private void cargarPokedollares() {
+		try (Connection conexion = DatabaseConnection.getConnection()) {
+			
+			pokedollares=this.entrenador.getDinero();
+			
+			actualizarLblPokedollares();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void actualizarLblPokedollares () {
+		lblPokeDollares.setText(String.valueOf(pokedollares));
+	}
+
 
 	private void inicializarObjetos() {
 		objetoPorImagen.put(imgObjAnillo, "Anillo");
@@ -112,8 +139,8 @@ public class TiendaController {
 			String nombreObjeto = objetoPorImagen.get(clicado);
 			int precio = precios.get(nombreObjeto);
 
-			if (entrenador.getDinero() >= precio) {
-				entrenador.setDinero(entrenador.getDinero() - precio);
+			if (entrenador.getPokedollares() >= precio) {
+				entrenador.setPokedollares(entrenador.getPokedollares()- precio);
 				entrenador.agregarObjeto(nombreObjeto);
 				mostrarAlerta("Compra exitosa", "Has comprado un " + nombreObjeto + " por " + precio + " pokedólares.");
 			} else {
@@ -131,10 +158,6 @@ public class TiendaController {
 		alert.showAndWait();
 	}
 
-	public void init(Stage currentStage, Entrenador entrenador2, PokemonCapturaController pokemonCapturaController) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	//falta enlazar los objetos en el fmxl <ImageView fx:id="imgObjAnillo" onMouseClicked="#comprarObjeto" />
 }

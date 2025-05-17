@@ -1,5 +1,12 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import database.DatabaseConnection;
+
 public class Mochila {
 
     private String nombre;
@@ -44,4 +51,46 @@ public class Mochila {
     public String toString() {
         return "Objeto: " + nombre + ", Cantidad: " + cantidad;
     }
+    
+    public static void agregarObjeto( String nombreObjeto) {
+        try (Connection conexion = DatabaseConnection.getConnection()) {
+
+            // Paso 1: Obtener el id del objeto por su nombre
+            int idObjeto = -1;
+            String queryId = "SELECT id_objeto FROM objeto WHERE num_objeto = ?";
+            try (PreparedStatement stmtId = conexion.prepareStatement(queryId)) {
+                stmtId.setString(1, nombreObjeto);
+                try (ResultSet rs = stmtId.executeQuery()) {
+                    if (rs.next()) {
+                        idObjeto = rs.getInt("id_objeto");
+                    } else {
+                        System.err.println("Objeto no encontrado en la tabla objeto: " + nombreObjeto);
+                        return;
+                    }
+                }
+            }
+
+            // Paso 2: Insertar o actualizar en la tabla mochila
+            String sql = """
+                INSERT INTO mochila (id_entrenador, id_objeto, cantidad)
+                VALUES (?, ?, 1)
+                ON DUPLICATE KEY UPDATE cantidad = cantidad + 1
+                """;
+
+            try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+                try {
+					stmt.setInt(1, idEntrenador);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                stmt.setInt(2, idObjeto);
+                stmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

@@ -53,7 +53,21 @@ public class EntrenadorDatabase {
 		return rd.nextInt(501) + 1000;
 	}
 		
-		
+	public static void obtenerIDPokedolaresEntre(Connection conn, Entrenador entrenador) {
+	    String sql = "SELECT id_entrenador, pokedollares FROM entrenador WHERE usuario = ?";
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, entrenador.getUsuario());
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                entrenador.setId_entrenador(rs.getInt("id_entrenador"));
+	                entrenador.setPokedollares(rs.getInt("pokedollares"));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 		
 	}
 	

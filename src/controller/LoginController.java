@@ -32,7 +32,7 @@ import controller.Menu;
 import javax.swing.JOptionPane;
 
 import java.sql.ResultSet;
-
+import database.MochilaDatabase;
 
 public class LoginController {
 	@FXML
@@ -135,8 +135,17 @@ public class LoginController {
 					if (opcion == JOptionPane.YES_OPTION) {
 
 						EntrenadorDatabase.crearEntrenador(conexion, entrenador);
-
+						EntrenadorDatabase.obtenerIDPokedolaresEntre(conexion, entrenador);
+						entrenador.setPokedollares(20000);
+						
+						MochilaDatabase.agregarObjeto(entrenador.getId_entrenador(), 8, 10);
+						
 						abrirMenuPrincipal(entrenador);
+						
+						
+						
+						
+						
 
 					} else {
 						passwordFieldUsuarioLogin.setText("");
@@ -145,8 +154,10 @@ public class LoginController {
 					while (rs.next()) {
 						if (rs.getString(1).equals(pass)) {
 							System.out.println("Usuario encontrado");
-							// Cambiamos de ventana
-							/*EntrenadorDatabase.obtenerIDPokedolaresEntre(conexion, entrenador);*/
+							
+					        EntrenadorDatabase.obtenerIDPokedolaresEntre(conexion, entrenador);
+
+							
 							abrirMenuPrincipal(entrenador);
 
 						} else {
@@ -165,6 +176,8 @@ public class LoginController {
 	
 	
 	
+
+
 	//Abrir menu principal
 	private void abrirMenuPrincipal(Entrenador ent) {
 	    try {

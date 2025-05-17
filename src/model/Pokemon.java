@@ -222,6 +222,9 @@ public class Pokemon {
 		this.IMG_Frontal=IMG_Frontal;
 		this.IMG_Trasera=IMG_Trasera;
 	}
+	public Pokemon() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

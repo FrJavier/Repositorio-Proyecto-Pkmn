@@ -5,8 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+
+import database.DatabaseConnection;
+import database.MochilaDatabase;
 
 public class Entrenador {
 
@@ -17,7 +21,7 @@ public class Entrenador {
 
 	private LinkedList<Pokemon> equipo;
 	private LinkedList<Caja> caja;
-	private LinkedList<Mochila> Mochila;
+	private ArrayList<Mochila> Mochila;
 
 	public int getId_entrenador() {
 		return id_entrenador;
@@ -74,7 +78,7 @@ public class Entrenador {
 	}
 
 	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<Pokemon> equipo,
-			LinkedList<Caja> caja, LinkedList<model.Mochila> Mochila) {
+			LinkedList<Caja> caja, ArrayList<model.Mochila> Mochila) {
 		super();
 		this.id_entrenador = id_entrenador;
 		this.usuario = usuario;
@@ -127,12 +131,28 @@ public class Entrenador {
 	}
 
 	public void agregarObjeto(String nombreObjeto) {
-		for (Mochila m : Mochila) {
-			if (m.getNombre().equalsIgnoreCase(nombreObjeto)) {
-				m.setCantidad(m.getCantidad() + 1);
-				return;
-			}
-		}
+		mochila.agregarObjeto(nombreObjeto);
+	    
+	    try (Connection conexion = DatabaseConnection.getConnection()) {
+	        String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
+	        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	            stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
+	            stmt.setString(2, nombreObjeto);
+	            stmt.executeUpdate();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
+	private Mochila mochila;
+
+
+
+public void cargarMochila() {
+    Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
+}
+
+
 
 }
