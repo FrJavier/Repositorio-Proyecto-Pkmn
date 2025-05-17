@@ -32,7 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -84,7 +83,11 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <Button fx:id="btnGenerar" layoutX="614.0" layoutY="348.0" mnemonicParsing="false" onAction="#generarPokemon" text="Generar" />
+            <ImageView fx:id="imgGenerar" fitHeight="65.0" fitWidth="186.0" layoutX="502.0" layoutY="328.0" onMouseClicked="#generarPokemon" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/imgGenerar.png" />
+               </image>
+            </ImageView>
       </children>
     </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />

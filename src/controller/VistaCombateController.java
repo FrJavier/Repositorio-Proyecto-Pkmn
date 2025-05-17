@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -128,12 +129,18 @@ public class VistaCombateController {
 	
 	
 	public void init(Stage stage, Entrenador entrenador, Turno turno) {
-		this.stage = stage;
-		this.entrenador = entrenador;
-		this.turno = turno;
-		this.mov = turno.getMovimiento(); 
-	}
+	    this.stage = stage;
+	    this.entrenador = entrenador;
+	    this.turno = turno;
 
+	    if (turno != null) {
+	        this.mov = turno.getMovimiento();
+	    } else {
+	        this.mov = null;
+	        System.out.println("Atención: turno es null en init de VistaCombateController");
+	    }
+	}
+	
 	public String ejecutarAtaque(Pokemon atacante, Pokemon defensor, movimiento movimiento) {
 		if (movimiento.getPp() <= 0) {
 			return atacante.getNombre() + " no tiene PP para usar " + movimiento.getNom_movimiento();
@@ -183,6 +190,11 @@ public class VistaCombateController {
 		double danioFinal = base * randomMod;
 
 		return (int) danioFinal;
+	}
+	
+	@FXML
+	public void initializate() {
+		
 	}
 
 	// usar objeto en Pokémon
@@ -263,7 +275,7 @@ public class VistaCombateController {
 		return "hecho";
 	}
 
-	private String ataque() {
+	public String ataque(ActionEvent event) {
 		if (mov == null) {
 			JOptionPane.showMessageDialog(null, "No existe movimiento");
 			return "Movimiento no disponible.";
@@ -358,9 +370,47 @@ public class VistaCombateController {
 	}
 	
 	
-	@FXML
-	private void sacarpokemon() {
-		
+	
+	private Pokemon sacarpokemon() {
+		Pokemon primerPokemon = null;
+
+		String sql = "SELECT p.id_pokemon, p.nombre, p.nivel, p.vitalidad, p.id_entrenador, p.velocidad, "
+	               + "p.atk_especial, pk.iMG_Trasera, p.ataque, p.defensa, p.def_especial, p.Estado "
+	               + "FROM pokemon p "
+	               + "JOIN pokedex pk ON p.num_pokedex = pk.num_pokedex "
+	               + "WHERE p.id_entrenador = ? "
+	               + "ORDER BY p.id_pokemon ASC "
+	               + "LIMIT 1";
+
+	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", ""); 
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setInt(1, entrenador.getId_entrenador());
+	        ResultSet rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            primerPokemon = new Pokemon(
+	                rs.getInt("id_pokemon"),
+	                rs.getString("nombre"),
+	                rs.getInt("nivel"),
+	                rs.getInt("vitalidad"),
+	                rs.getInt("id_entrenador"),
+	                rs.getInt("velocidad"),
+	                rs.getInt("atk_especial"),
+	                rs.getString("iMG_Trasera"),
+	                rs.getInt("ataque"),
+	                rs.getInt("defensa"),
+	                rs.getInt("def_especial"),
+	                rs.getString("Estado")
+	                
+	            );
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return primerPokemon;
 	}
 	
 	@FXML
@@ -372,8 +422,20 @@ public class VistaCombateController {
 		barracombate.setVisible(true);
 		btnEmpezar.setVisible(false);
 		generarPokemon();
+		pokemonJugador=sacarpokemon();
+		
+
+		if (pokemonJugador != null) {
+			txtnombrepk.setText(pokemonJugador.getNombre());
+			txtnvlpkm.setText("Nivel: " + pokemonJugador.getNivel());
+
+			File archivo = new File(pokemonJugador.getIMG_Trasera());
+			Image image = new Image(archivo.toURI().toString());
+			imgpkmuser.setImage(image);
+	}else {
+		JOptionPane.showMessageDialog(null, "ERROR NO SE HA CARGAO EL POKEMON");
 	}
-	
+	}
 	
     @FXML
     private void abrirMenu() {
@@ -412,6 +474,11 @@ public class VistaCombateController {
 
 	public void setPkDerrotadosRival(int pkDerrotadosRival) {
 		this.pkDerrotadosRival = pkDerrotadosRival;
+	}
+
+	public void init(Stage currentStage, Entrenador entrenador2, Menu menu) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

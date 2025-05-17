@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Entrenador;
+import model.Turno;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -54,6 +55,7 @@ public class Menu {
     private LoginController loginControllerr;
     private Stage stag;
     private Entrenador entrenador;
+    Turno turno;
     //-----------------------------------------
 
     
@@ -133,10 +135,15 @@ public class Menu {
         try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCombate.fxml"));
 			Parent root = loader.load();
+			
+			 VistaCombateController combateController = loader.getController();
 
+			 
+			combateController.init(stage, entrenador,turno);
 			// Crear y mostrar la nueva escena
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			 Scene scene = new Scene(root);
+			 stage.setScene(scene);
+
 			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
