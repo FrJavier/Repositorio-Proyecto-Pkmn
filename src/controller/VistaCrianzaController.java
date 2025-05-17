@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,13 +12,44 @@ import javafx.stage.Stage;
 import model.Entrenador;
 
 public class VistaCrianzaController {
-    
+
+	
+
+    @FXML
+    private ImageView imgPokemon1;
+
+    @FXML
+    private ImageView imgPokemon2;
+
+    @FXML
+    private ImageView imgPotaxio;
+
+    @FXML
+    void amor(MouseEvent event) {
+
+    }
+
+    @FXML
+    void añadirPokemon1(MouseEvent event) {
+
+    }
+
+    @FXML
+    void añadirPokemon2(MouseEvent event) {
+
+    }
+
+    @FXML
+    void queTocas(MouseEvent event) {
+		JOptionPane.showMessageDialog(null, "Chacho que tocas?!");
+    }
+	
     //Init--------------------------------------------------------------------------
     //variables necesarias para iniciar el init
     private Menu menu;
     private Entrenador entrenador;
-	private Stage stage;
-	
+    private Stage stage;
+
     //metodo
     public void init(Stage stage, Entrenador entrenador, Menu menu) {
         this.stage = stage;
