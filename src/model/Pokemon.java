@@ -261,10 +261,8 @@ public class Pokemon {
 		this.hpTotal = hpTotal;
 	}
 
-	public Pokemon(int id_pokemon, int id_entrenador, int num_pokedex, String note, int vitalidad, int ataque,
-			int defensa, int atk_especial, int def_especial, int velocidad, int nivel, int fertilidad, char sexo,
-			String estado, int equipo, int id_objeto, String nombre, String iMG_Frontal, String iMG_Trasera,
-			int nIVEL_EVOLUCION, String sONIDO, model.Objeto Objeto) {
+	public Pokemon(int id_pokemon, String note, int vitalidad, int ataque,
+			int defensa, int atk_especial, int def_especial, String estado, int equipo, int id_objeto, int nIVEL_EVOLUCION, String sONIDO) {
 		super();
 		this.id_pokemon = id_pokemon;
 		this.id_entrenador = id_entrenador;
@@ -283,8 +281,8 @@ public class Pokemon {
 		this.equipo = equipo;
 		this.id_objeto = id_objeto;
 		this.nombre = nombre;
-		IMG_Frontal = iMG_Frontal;
-		IMG_Trasera = iMG_Trasera;
+		IMG_Frontal = IMG_Frontal;
+		IMG_Trasera = IMG_Trasera;
 		NIVEL_EVOLUCION = nIVEL_EVOLUCION;
 		SONIDO = sONIDO;
 		this.Objeto = Objeto;
@@ -300,6 +298,24 @@ public class Pokemon {
 		this.NIVEL_EVOLUCION = NIVEL_EVOLUCION;
 		this.IMG_Frontal = IMG_Frontal;
 		this.IMG_Trasera = IMG_Trasera;
+	}
+	
+		
+	public Pokemon(int id_pokemon, int id_entrenador, int vitalidad, int ataque, int defensa, int atk_especial,
+			int def_especial, int velocidad, int nivel, String estado, String nombre, String iMG_Trasera) {
+		super();
+		this.id_pokemon = id_pokemon;
+		this.id_entrenador = id_entrenador;
+		this.vitalidad = vitalidad;
+		this.ataque = ataque;
+		this.defensa = defensa;
+		this.atk_especial = atk_especial;
+		this.def_especial = def_especial;
+		this.velocidad = velocidad;
+		this.nivel = nivel;
+		this.estado = estado;
+		this.nombre = nombre;
+		IMG_Trasera = iMG_Trasera;
 	}
 
 	public Pokemon() {

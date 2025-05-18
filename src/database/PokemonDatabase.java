@@ -147,11 +147,7 @@ public class PokemonDatabase {
 				nivel = 50;
 				};
 
-				nuevoPokemon = new Pokemon(nuevoIdPokemon, idEntrenador, rs.getInt("NUM_POKEDEX"), 0,
-						rs.getString("TIPO1"), rs.getString("TIPO2"), vitalidad, ataque,
-						defensa, ataqueEspecial, defensaEspecial, velocidad, nivel, fertilidad, 3,
-						rs.getString("NOM_POKEMON"), estado, sexo, vitalidad, vitalidad, ataque, defensa, ataqueEspecial, 
-						defensaEspecial, velocidad);
+			
 
 			} catch (SQLException e) {
 				System.err.println("Error al generar el Pokemon principal: " + e.getMessage());

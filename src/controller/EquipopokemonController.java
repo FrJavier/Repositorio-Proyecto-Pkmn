@@ -205,8 +205,7 @@ public class EquipopokemonController {
             JOptionPane.showMessageDialog(null, elegido.getNote() + " ha sido añadido al equipo.");
         }
 
-        // Actualiza la interfaz si lo deseas
-        // actualizarVistaEquipo(); // <-- Puedes implementar este método para recargar la vista
+ 
     }
     
     //metodo para actualizar las vistas de los pokemon que hay en el equipo

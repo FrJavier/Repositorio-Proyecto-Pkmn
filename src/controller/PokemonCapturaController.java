@@ -228,7 +228,8 @@ public class PokemonCapturaController {
 	            	         "INSERT INTO pokemon (id_entrenador, num_pokedex, nivel, note, vitalidad, ataque, defensa, atk_especial, def_especial, velocidad, nombre) " +
 	            	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
-	            	    ps.setInt(1, entrenador.getId_entrenador());
+	            	  
+	            		ps.setInt(1, entrenador.getId_entrenador());
 	            	    ps.setInt(2, pokemon.getNum_pokedex());
 	            	    ps.setInt(3, 1);
 	            	    ps.setString(4, mote);

@@ -430,7 +430,7 @@ public class VistaCombateController {
 	                rs.getInt("def_especial"),
 	                rs.getString("Estado")
 	                
-	            );
+	         );
 	        }
 
 	    } catch (SQLException e) {
@@ -458,7 +458,7 @@ public class VistaCombateController {
 		pokemonJugador = sacarpokemon(); // selecciona Pokémon del jugador
 
 		if (pokemonJugador != null) {
-			int idPokemon = pokemonJugador.getId_pokemon(); // asegúrate de tener este método en la clase
+			int idPokemon = pokemonJugador.getId_pokemon(); 
 
 			try {
 				LinkedList<movimiento> movimientos = MovimientosDatabase.cargarMovimientos(conn, pokemonJugador.getId_pokemon());

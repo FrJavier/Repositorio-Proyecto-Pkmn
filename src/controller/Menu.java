@@ -224,6 +224,7 @@ public class Menu {
 	    this.entrenador = ent;
 	    this.stage = stage;
 	    this.loginController = loginController;
+	   
 	}
     //------------------------------------------------------------------------------
 
