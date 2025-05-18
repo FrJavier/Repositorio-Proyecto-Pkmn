@@ -328,7 +328,7 @@ public class VistaCombateController {
 
 
 	
-
+	@FXML
 	public void huir(ActionEvent event) {
 		 try {
 	            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
