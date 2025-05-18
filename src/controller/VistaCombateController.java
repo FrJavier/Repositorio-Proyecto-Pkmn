@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -133,6 +132,7 @@ public class VistaCombateController {
 	
 	
 	public void init(Stage stage, Entrenador entrenador, Turno turno) {
+<<<<<<< HEAD
 	    this.stage = stage;
 	    this.entrenador = entrenador;
 	    this.turno = turno;
@@ -149,8 +149,14 @@ public class VistaCombateController {
 	        this.mov = null;
 	        System.out.println("Atención: turno es null en init de VistaCombateController");
 	    }
+=======
+		this.stage = stage;
+		this.entrenador = entrenador;
+		this.turno = turno;
+		this.mov = turno.getMovimiento(); 
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 	}
-	
+
 	public String ejecutarAtaque(Pokemon atacante, Pokemon defensor, movimiento movimiento) {
 		if (movimiento.getPp() <= 0) {
 			return atacante.getNombre() + " no tiene PP para usar " + movimiento.getNom_movimiento();
@@ -201,11 +207,14 @@ public class VistaCombateController {
 
 		return (int) danioFinal;
 	}
+<<<<<<< HEAD
 	
 	@FXML
 	public void initialize() {
 		
 	}
+=======
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 
 	// usar objeto en Pokémon
 	public String usarObjeto(Pokemon objetivo, Objeto objeto) {
@@ -285,6 +294,7 @@ public class VistaCombateController {
 		return "hecho";
 	}
 
+<<<<<<< HEAD
 	public String ataque(ActionEvent event) {
 		btnmv1.setOnAction(e -> {
 		    mov = pokemonJugador.getMovimientos().get(0);
@@ -294,6 +304,9 @@ public class VistaCombateController {
 		
 				);
 		
+=======
+	private String ataque() {
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 		if (mov == null) {
 			JOptionPane.showMessageDialog(null, "No existe movimiento");
 			return "Movimiento no disponible.";
@@ -328,7 +341,7 @@ public class VistaCombateController {
 
 
 	
-
+	@FXML
 	public void huir(ActionEvent event) {
 		 try {
 	            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
@@ -397,47 +410,9 @@ public class VistaCombateController {
 	}
 	
 	
-	
-	private Pokemon sacarpokemon() {
-		Pokemon primerPokemon = null;
-
-		String sql = "SELECT p.id_pokemon, p.nombre, p.nivel, p.vitalidad, p.id_entrenador, p.velocidad, "
-	               + "p.atk_especial, pk.iMG_Trasera, p.ataque, p.defensa, p.def_especial, p.Estado "
-	               + "FROM pokemon p "
-	               + "JOIN pokedex pk ON p.num_pokedex = pk.num_pokedex "
-	               + "WHERE p.id_entrenador = ? "
-	               + "ORDER BY p.id_pokemon ASC "
-	               + "LIMIT 1";
-
-	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", ""); 
-	         PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-	        stmt.setInt(1, entrenador.getId_entrenador());
-	        ResultSet rs = stmt.executeQuery();
-
-	        if (rs.next()) {
-	            primerPokemon = new Pokemon(
-	                rs.getInt("id_pokemon"),
-	                rs.getString("nombre"),
-	                rs.getInt("nivel"),
-	                rs.getInt("vitalidad"),
-	                rs.getInt("id_entrenador"),
-	                rs.getInt("velocidad"),
-	                rs.getInt("atk_especial"),
-	                rs.getString("iMG_Trasera"),
-	                rs.getInt("ataque"),
-	                rs.getInt("defensa"),
-	                rs.getInt("def_especial"),
-	                rs.getString("Estado")
-	                
-	            );
-	        }
-
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-
-	    return primerPokemon;
+	@FXML
+	private void sacarpokemon() {
+		
 	}
 	
 	@FXML
@@ -453,6 +428,7 @@ public class VistaCombateController {
 		imgpkmuser.setVisible(true);
 		barracombate.setVisible(true);
 		btnEmpezar.setVisible(false);
+<<<<<<< HEAD
 
 		generarPokemon(); // genera rival
 		pokemonJugador = sacarpokemon(); // selecciona Pokémon del jugador
@@ -481,7 +457,11 @@ public class VistaCombateController {
 		} } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+=======
+		generarPokemon();
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 	}
+	
 	
     @FXML
     private void abrirMenu() {
@@ -525,6 +505,7 @@ public class VistaCombateController {
 	public void setPkDerrotadosRival(int pkDerrotadosRival) {
 		this.pkDerrotadosRival = pkDerrotadosRival;
 	}
+<<<<<<< HEAD
 	public void setConnection(Connection conn) {
 	    this.conn = conn;
 	}
@@ -533,6 +514,8 @@ public class VistaCombateController {
 		// TODO Auto-generated method stub
 		
 	}
+=======
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 	
 	public void setPokemonJugador(Pokemon pokemon) {
 	    this.pokemonJugador = pokemon;

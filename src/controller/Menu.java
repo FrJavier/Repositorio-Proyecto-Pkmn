@@ -15,8 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Entrenador;
+<<<<<<< HEAD
 import model.Pokemon;
 import model.Turno;
+=======
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -57,10 +60,13 @@ public class Menu {
     private LoginController loginControllerr;
     private Stage stag;
     private Entrenador entrenador;
+<<<<<<< HEAD
     Turno turno;
     private Connection conn;
     Pokemon pokemon;
     private Pokemon pokemonJugador;
+=======
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
     //-----------------------------------------
 
     
@@ -140,6 +146,7 @@ public class Menu {
         try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCombate.fxml"));
 			Parent root = loader.load();
+<<<<<<< HEAD
 			
 			VistaCombateController combateController = loader.getController();
 			
@@ -162,6 +169,13 @@ public class Menu {
 			// Crear y mostrar la nueva escena
 			 Scene scene = new Scene(root);
 			 stage.setScene(scene);
+=======
+
+			// Crear y mostrar la nueva escena
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+>>>>>>> parent of fcfdc14 (Merge branch 'main' of https://github.com/FrJavier/Repositorio-Proyecto-Pkmn)
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -96,7 +96,7 @@ public class CentropokemonController {
     @FXML
     private void curaPokemon(ActionEvent event) {
         if (entrenador == null || entrenador.getEquipo() == null || entrenador.getEquipo().isEmpty()) {
-	        JOptionPane.showMessageDialog(null, "no hay pokemons para curar");
+	        JOptionPane.showMessageDialog(null, "no hay pokemonspara curar");
             return;
         }
 
