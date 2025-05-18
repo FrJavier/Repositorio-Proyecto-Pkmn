@@ -23,8 +23,6 @@ public class TiendaController {
     @FXML
     private ImageView imgObjAnillo;
 
-    @FXML private ImageView imgPokedollares;
-    
     @FXML
     private ImageView imgObjBaston;
 

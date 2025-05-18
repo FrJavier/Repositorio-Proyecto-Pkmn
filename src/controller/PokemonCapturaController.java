@@ -34,29 +34,29 @@ import database.MovimientosDatabase;
 
 public class PokemonCapturaController {
 
-    @FXML
-    private ImageView imgCapturaPokemon;
+	@FXML
+	private Button btnGenerar;
 
-    @FXML
-    private ImageView imgCaturar;
+	@FXML
+	private ImageView imgCapturaPokemon;
 
-    @FXML
-    private ImageView imgGenerar;
+	@FXML
+	private ImageView imgCaturar;
 
-    @FXML
-    private ImageView imgPokemonCaptura;
+	@FXML
+	private ImageView imgPokemonCaptura;
 
-    @FXML
-    private ImageView imgPotaxioAtras;
+	@FXML
+	private ImageView imgPotaxioAtras;
 
-    @FXML
-    private ImageView imgSalir;
+	@FXML
+	private ImageView imgSalir;
 
-    @FXML
-    private Label lblNumeroPokebolas;
+	@FXML
+	private Label lblNumeroPokebolas;
 
-    @FXML
-    private Label lbltxtpkmncptura;
+	@FXML
+	private Label lbltxtpkmncptura;
 
 	// Init--------------------------------------------------------------------------
 	// variables necesarias para iniciar el init
@@ -143,8 +143,8 @@ public class PokemonCapturaController {
 	}
 
 	// Generar pokemon
-    @FXML
-    void generarPokemon(MouseEvent event) {
+	@FXML
+	public void generarPokemon(ActionEvent event) {
 		Random azar = new Random();
 		int pokemonid = azar.nextInt(151) + 1;
 
@@ -195,8 +195,7 @@ public class PokemonCapturaController {
 			e.printStackTrace();
 		}
 	             }
-    }
-	
+	}
 
 	public void capturarPkmn(MouseEvent event) {
 

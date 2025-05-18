@@ -138,6 +138,7 @@ public class Entrenador {
 	        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
 	            stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
 	            stmt.setString(2, nombreObjeto);
+	            stmt.executeUpdate();
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
