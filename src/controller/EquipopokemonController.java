@@ -94,6 +94,8 @@ public class EquipopokemonController {
         this.stage = stage;
         this.entrenador = entrenador;  // guarda el entrenador
         this.menu = menu;  // guarda el controlador del menu
+        
+        actualizarVistaEquipo(entrenador);
     }
     //------------------------------------------------------------------------------
     //Volver al menu----------------------------------------------------------------
@@ -188,11 +190,12 @@ public class EquipopokemonController {
                 }
 
                 if (aSacar != null) {
-                    // Intercambiar
+                    //intercambiar
                     entrenador.sacarDelEquipo(aSacar); // pone equipo = 0
                     entrenador.meterAlEquipo(elegido); // pone equipo = 1
 
                     JOptionPane.showMessageDialog(null, elegido.getNote() + " ha sido añadido al equipo.\n" + aSacar.getNote() + " ha sido enviado a la caja.");
+                    actualizarVistaEquipo(entrenador);
                 }
 
             } else {
@@ -203,10 +206,11 @@ public class EquipopokemonController {
             // Añadir directamente al equipo
             entrenador.meterAlEquipo(elegido);
             JOptionPane.showMessageDialog(null, elegido.getNote() + " ha sido añadido al equipo.");
+            
+            actualizarVistaEquipo(entrenador);
         }
 
-        // Actualiza la interfaz si lo deseas
-        // actualizarVistaEquipo(); // <-- Puedes implementar este método para recargar la vista
+        
     }
     
     //metodo para actualizar las vistas de los pokemon que hay en el equipo

@@ -74,7 +74,9 @@ public class Entrenador {
 		super();
 		this.usuario = usuario;
 		this.pass = pass;
-
+		this.equipo = new LinkedList<>();
+		this.caja = new LinkedList<>();
+		this.Mochila = new ArrayList<>();
 	}
 
 	public Entrenador(int id_entrenador, String usuario, String pass, int pokedollares, LinkedList<Pokemon> equipo,
@@ -84,9 +86,9 @@ public class Entrenador {
 		this.usuario = usuario;
 		this.pass = pass;
 		this.pokedollares = pokedollares;
-		this.equipo = equipo;
-		this.caja = caja;
-		this.Mochila = Mochila;
+		this.equipo = new LinkedList<>();
+		this.caja = new LinkedList<>();
+		this.Mochila = new ArrayList<>();
 	}
 
 	// para comprobar el dinero del que dispone el entreandor en la tienda
@@ -131,28 +133,75 @@ public class Entrenador {
 	}
 
 	public void agregarObjeto(String nombreObjeto) {
-		mochila.agregarObjeto(id_entrenador, nombreObjeto);
-	    
-	    try (Connection conexion = DatabaseConnection.getConnection()) {
-	        String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
-	        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-	            stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
-	            stmt.setString(2, nombreObjeto);
-	            stmt.executeUpdate();
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		model.Mochila.agregarObjeto(id_entrenador, nombreObjeto);
+
+		try (Connection conexion = DatabaseConnection.getConnection()) {
+			String sql = "INSERT INTO objetos_entrenador (entrenador_id, objeto_nombre) VALUES (?, ?)";
+			try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+				stmt.setInt(1, this.id_entrenador); // Asegúrate de tener `id` en Entrenador
+				stmt.setString(2, nombreObjeto);
+				stmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private Mochila mochila;
+	public void cargarMochila() {
+		Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
+	}
 
+	// Obtener los Pokémon de la caja (como lista de Pokémon)
+	public LinkedList<Pokemon> getPokemonCaja() {
+		LinkedList<Pokemon> pokemonsCaja = new LinkedList<>();
+		if (caja != null) {
+			for (Caja c : caja) {
+				pokemonsCaja.add(c.getPokemon());
+			}
+		}
+		return pokemonsCaja;
+	}
 
+	// Meter un Pokémon al equipo desde la caja
+	public void meterAlEquipo(Pokemon pokemon) {
+		if (equipo == null)
+			equipo = new LinkedList<>();
+		if (caja == null)
+			caja = new LinkedList<>();
 
-public void cargarMochila() {
-    Mochila = MochilaDatabase.cargarObjetos(this.id_entrenador);
-}
+		if (equipo.size() >= 6) {
+			throw new IllegalStateException("El equipo ya tiene 6 Pokémon.");
+		}
 
+		// Eliminar de la caja si está allí
+		Caja encontrada = null;
+		for (Caja c : caja) {
+			if (c.getPokemon().equals(pokemon)) {
+				encontrada = c;
+				break;
+			}
+		}
 
+		if (encontrada != null) {
+			caja.remove(encontrada);
+		}
 
+		equipo.add(pokemon);
+	}
+
+	// Sacar un Pokémon del equipo y mandarlo a la caja
+	public void sacarDelEquipo(Pokemon pokemon) {
+		if (equipo == null)
+			equipo = new LinkedList<>();
+		if (caja == null)
+			caja = new LinkedList<>();
+
+		if (equipo.remove(pokemon)) {
+			caja.add(new Caja(pokemon));
+		}
+	}
+
+	public ArrayList<Mochila> getMochila() {
+		return Mochila;
+	}
 }
