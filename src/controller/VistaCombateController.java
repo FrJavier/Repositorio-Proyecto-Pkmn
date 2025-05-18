@@ -7,10 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import database.MovimientosDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,10 +116,12 @@ public class VistaCombateController {
     private Label txtnvlpkm;
 
 	Entrenador entrenador;
+	Pokemon pokemon;
 	Turno turno;
 	Pokemon atacante;
 	Pokemon defensor;
 	private Pokemon pokemonJugador;
+	private Pokemon pokemonEntrenador;
 	private Pokemon pokemonRival;
 	int pkDerrotadosUser;
 	int pkDerrotadosRival;
@@ -125,13 +129,19 @@ public class VistaCombateController {
 	MVataque m = new MVataque();
 	private Stage stage ;
 	movimiento mov;
-	
+	private Connection conn;
 	
 	
 	public void init(Stage stage, Entrenador entrenador, Turno turno) {
 	    this.stage = stage;
 	    this.entrenador = entrenador;
 	    this.turno = turno;
+	    
+	    if (pokemonJugador == null) {
+	        System.out.println("pokemonJugador es null");
+	    } else {
+	        System.out.println("pokemonJugador id: " + pokemonJugador.getId_pokemon());
+	    }
 
 	    if (turno != null) {
 	        this.mov = turno.getMovimiento();
@@ -168,9 +178,9 @@ public class VistaCombateController {
 	}
 
 	// formula "simple" de daño
-	public int calcularDanio(Pokemon atacante, Pokemon defensor, MVataque movimiento) {
+	public int calcularDanio(Pokemon atacante, Pokemon defensor,MVataque movimiento) {
 		int nivel = atacante.getNivel();
-		int poder = movimiento.getPoder(); // potencia del movimiento
+		int poder = movimiento.getPoder();
 
 		double ataqueStat;
 		double defensaStat;
@@ -193,7 +203,7 @@ public class VistaCombateController {
 	}
 	
 	@FXML
-	public void initializate() {
+	public void initialize() {
 		
 	}
 
@@ -276,6 +286,14 @@ public class VistaCombateController {
 	}
 
 	public String ataque(ActionEvent event) {
+		btnmv1.setOnAction(e -> {
+		    mov = pokemonJugador.getMovimientos().get(0);
+		    ataque(e);
+		    
+		}
+		
+				);
+		
 		if (mov == null) {
 			JOptionPane.showMessageDialog(null, "No existe movimiento");
 			return "Movimiento no disponible.";
@@ -311,17 +329,26 @@ public class VistaCombateController {
 
 	
 
-	private void huir(ActionEvent event) {
-		Random azar = new Random();
-		int aaaa=azar.nextInt(10)+1;
-		if (aaaa>5) {
-			JOptionPane.showMessageDialog(null, "Huiste sin problemas");
+	public void huir(ActionEvent event) {
+		 try {
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Menu.fxml"));
+	            Parent root = loader.load();
+
+	            // Obtener el controlador del menú cargado
+	            Menu menuController = loader.getController();
+
+	            // Inicializar el controlador con el entrenador y el stage actuales
+	            menuController.init(entrenador, stage, null); 
+
+	            // Cambiar la escena al menú
+	            Scene scene = new Scene(root);
+	            stage.setScene(scene);
+	            stage.show();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		
 			
-			
-		} else {
-			JOptionPane.showMessageDialog(null, "No has podido escapar");
-			
-		}
 	}
 
 	@FXML
@@ -416,25 +443,44 @@ public class VistaCombateController {
 	@FXML
 	private void Comenzarcombate(ActionEvent event) {
 		
+		try {
+	        if (conn == null || conn.isClosed()) {
+	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", "");
+	        }
+
 		panepkm.setVisible(true);
 		panerival.setVisible(true);
 		imgpkmuser.setVisible(true);
 		barracombate.setVisible(true);
 		btnEmpezar.setVisible(false);
-		generarPokemon();
-		pokemonJugador=sacarpokemon();
-		
+
+		generarPokemon(); // genera rival
+		pokemonJugador = sacarpokemon(); // selecciona Pokémon del jugador
 
 		if (pokemonJugador != null) {
+			int idPokemon = pokemonJugador.getId_pokemon(); // asegúrate de tener este método en la clase
+
+			try {
+				LinkedList<movimiento> movimientos = MovimientosDatabase.cargarMovimientos(conn, pokemonJugador.getId_pokemon());
+				System.out.println("Movimientos cargados: " + movimientos.size());
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Error al cargar movimientos del Pokémon");
+				e.printStackTrace();
+				return;
+			}
+
 			txtnombrepk.setText(pokemonJugador.getNombre());
 			txtnvlpkm.setText("Nivel: " + pokemonJugador.getNivel());
 
 			File archivo = new File(pokemonJugador.getIMG_Trasera());
 			Image image = new Image(archivo.toURI().toString());
 			imgpkmuser.setImage(image);
-	}else {
-		JOptionPane.showMessageDialog(null, "ERROR NO SE HA CARGAO EL POKEMON");
-	}
+
+		} else {
+			JOptionPane.showMessageDialog(null, "ERROR: No se ha cargado el Pokémon.");
+		} } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
     @FXML
@@ -467,6 +513,10 @@ public class VistaCombateController {
 	public void setPkDerrotadosUser(int pkDerrotadosUser) {
 		this.pkDerrotadosUser = pkDerrotadosUser;
 	}
+	public void setPokemon(Pokemon pokemon) {
+	    this.pokemon = pokemon;
+	    System.out.println("Pokemon recibido en VistaCombateController: " + pokemon.getNombre());
+	}
 
 	public int getPkDerrotadosRival() {
 		return pkDerrotadosRival;
@@ -475,10 +525,30 @@ public class VistaCombateController {
 	public void setPkDerrotadosRival(int pkDerrotadosRival) {
 		this.pkDerrotadosRival = pkDerrotadosRival;
 	}
+	public void setConnection(Connection conn) {
+	    this.conn = conn;
+	}
 
 	public void init(Stage currentStage, Entrenador entrenador2, Menu menu) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setPokemonJugador(Pokemon pokemon) {
+	    this.pokemonJugador = pokemon;
+	}
+
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEntrenador(Entrenador entrenador2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setPokemonEntrenador(Pokemon pokemon) {
+	    this.pokemonEntrenador = pokemon;
 	}
 	
 	

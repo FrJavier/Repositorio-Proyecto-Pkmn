@@ -3,6 +3,7 @@ package controller;
 import java.sql.Connection;
 
 import database.DatabaseConnection;
+import database.MovimientosDatabase;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Entrenador;
+import model.Pokemon;
 import model.Turno;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -56,6 +58,9 @@ public class Menu {
     private Stage stag;
     private Entrenador entrenador;
     Turno turno;
+    private Connection conn;
+    Pokemon pokemon;
+    private Pokemon pokemonJugador;
     //-----------------------------------------
 
     
@@ -136,15 +141,27 @@ public class Menu {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VistaCombate.fxml"));
 			Parent root = loader.load();
 			
-			 VistaCombateController combateController = loader.getController();
+			VistaCombateController combateController = loader.getController();
+			
+			Connection conexion = DatabaseConnection.getConnection();
+			if (pokemonJugador != null) {
+			    pokemonJugador.setMovimientos(MovimientosDatabase.cargarMovimientos(conexion, pokemonJugador.getId_pokemon()));
+			} else {
+			    System.out.println("pokemonJugador está null");
+			}
+		
 
 			 
-			combateController.init(stage, entrenador,turno);
+			 
+			  combateController.setEntrenador(entrenador);
+			  combateController.setPokemonEntrenador(pokemonJugador); 
+			  combateController.setConnection(conexion); 
+			  combateController.init(stage, entrenador, turno);
+			
+
 			// Crear y mostrar la nueva escena
 			 Scene scene = new Scene(root);
 			 stage.setScene(scene);
-
-			stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,6 +185,7 @@ public class Menu {
             e.printStackTrace();
         }
     }
+    
     
     @FXML
     void cerrar(MouseEvent  event) {
@@ -219,6 +237,10 @@ public class Menu {
 	    this.entrenador = entrenador;
 	}
 
+
+	public void setPokemonJugador(Pokemon pokemon) {
+		this.pokemonJugador = pokemon;
+}
 
 	
 

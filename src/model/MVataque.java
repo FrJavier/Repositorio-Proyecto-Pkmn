@@ -6,21 +6,32 @@ public class MVataque extends movimiento {
 	    private tipo tipo;
 	    private int pp;
 
-	    public void MovimientoFisico(String nombre, int poder, int pp, tipo tipo) {
+	    public MVataque(String nombre, int poder, int pp, tipo tipo) {
 	        this.setNom_movimiento(nombre);
 	        this.poder = poder;
 	        this.pp = pp;
 	        this.tipo = tipo;
 	    }
 
-	    public  int getPoder() {
+	    public MVataque() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public  int getPoder() {
 	        return poder;
+	    }
+	    
+	    public void setPotencia(int poder) {
+	        this.poder = poder;
 	    }
 
 	    public tipo getTipo() {
 	        return tipo;
 	    }
-
+	    public void setTipo(tipo tipo) {
+	        this.tipo = tipo;
+	    }
+	    
 	    public int getPp() {
 	        return pp;
 	    }

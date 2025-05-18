@@ -30,6 +30,7 @@ import model.Pokemon;
 import database.DatabaseConnection;
 import database.EntrenadorDatabase;
 import database.MochilaDatabase;
+import database.MovimientosDatabase;
 
 public class PokemonCapturaController {
 
@@ -64,6 +65,7 @@ public class PokemonCapturaController {
 	private Stage stage;
 	Random azar = new Random();
 	int pokemonid=0;
+	Connection conexion;
 
 	// metodo
 	public void init(Stage stage, Entrenador entrenador, Menu menu) {
@@ -197,7 +199,7 @@ public class PokemonCapturaController {
 
 	public void capturarPkmn(MouseEvent event) {
 
-		int nuevoIdPokemon = 0;
+		
 		
 	    if (pokeballs > 0 && pokemon != null) {
 	        pokeballs--;
@@ -222,12 +224,12 @@ public class PokemonCapturaController {
 
 	            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemones", "root", "");
 	            	     PreparedStatement ps = conn.prepareStatement(
-	            	         "INSERT INTO pokemon (id_entrenador, num_pokedex, nivel, note, vitalidad, ataque, defensa, atk_especial, def_especial, velocidad,nombre) " +
-	            	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
+	            	         "INSERT INTO pokemon (id_entrenador, num_pokedex, nivel, note, vitalidad, ataque, defensa, atk_especial, def_especial, velocidad, nombre) " +
+	            	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
 	            	    ps.setInt(1, entrenador.getId_entrenador());
 	            	    ps.setInt(2, pokemon.getNum_pokedex());
-	            	    ps.setInt(3, 1); 
+	            	    ps.setInt(3, 1);
 	            	    ps.setString(4, mote);
 	            	    ps.setInt(5, pokemon.getVitalidad());
 	            	    ps.setInt(6, pokemon.getAtaque());
@@ -239,23 +241,28 @@ public class PokemonCapturaController {
 
 	            	    ps.executeUpdate();
 
-	                
-	                entrenador.agregarPokemonAlEquipo(pokemon);
+	            	    ResultSet rs = ps.getGeneratedKeys();
+	            	    int nuevoIdPokemon = -1;
+	            	    if (rs.next()) {
+	            	        nuevoIdPokemon = rs.getInt(1);
+	            	    }
+	            	    rs.close();
+	            	    ps.close();
 
-	                JOptionPane.showMessageDialog(null, "Pokémon capturado y añadido a tu equipo!");
+	            	    Connection conexion = DatabaseConnection.getConnection();
+	            	    MovimientosDatabase.asignarMovimientosAleatorios(conexion, nuevoIdPokemon);
+	            	    conexion.close();
 
-	                generarPokemon(null);
+	            	    entrenador.agregarPokemonAlEquipo(pokemon);
+	            	    JOptionPane.showMessageDialog(null, "POKEMON CAPTURAO Y AL EQUIPO");
+	            	    generarPokemon(null);
 
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	                JOptionPane.showMessageDialog(null, "Error al guardar el Pokémon en la base de datos.");
-	            }
-	        }
-
-	    } else {
-	        JOptionPane.showMessageDialog(null, "NO TIENES POKEBALLS COMPRA ANDA");
-	    }
-	}
+	            	} catch (SQLException e) {
+	            	    e.printStackTrace();
+	            	    JOptionPane.showMessageDialog(null, "ERROR");
+	            	}
+	            	}}
+	            	}
 
 
 	public void setEntrenador(Entrenador entrenador) {
